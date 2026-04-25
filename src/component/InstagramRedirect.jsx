@@ -14,14 +14,11 @@ const InstagramRedirect = () => {
   const openInBrowser = () => {
    
     const url = window.location.href;
-
-    // Android Chrome intent
     window.location.href = `intent://${url.replace(
       /^https?:\/\//,
       ""
     )}#Intent;scheme=https;package=com.android.chrome;end`;
 
-    // Fallback (iOS)
     setTimeout(() => {
       window.open(url, "_blank");
     }, 500);
@@ -32,7 +29,7 @@ const InstagramRedirect = () => {
   return (
     <div style={styles.overlay}>
       <div style={styles.popup}>
-        <h3 style={{ marginBottom: "10px" }}>Better Experience 🚀</h3>
+        <h3 style={{ marginBottom: "10px" }}>Better Experience</h3>
 
         <p style={{ fontSize: "14px", marginBottom: "15px" }}>
           For audio, animations & smooth reading, open in your browser.
