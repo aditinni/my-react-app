@@ -8,7 +8,7 @@ const AboutAuthor = () => {
             <Navbar />
 
             <div style={styles.page}>
-                <div style={styles.container}>
+                <div style={styles.container} className="about-container">
 
                     <div style={styles.left}>
                         <img
@@ -53,6 +53,19 @@ const AboutAuthor = () => {
 
                 </div>
             </div>
+
+            {/* RESPONSIVE CSS */}
+            <style>
+                {`
+                    @media (max-width: 768px) {
+                        .about-container {
+                            flex-direction: column !important;
+                            gap: 30px !important;
+                            text-align: center;
+                        }
+                    }
+                `}
+            </style>
         </>
     );
 };
