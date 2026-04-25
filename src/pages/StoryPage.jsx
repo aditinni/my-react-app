@@ -128,15 +128,6 @@ const StoryPage = () => {
             <div style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
                 <h1>{story.title}</h1>
 
-                <img
-                    src={story.image}
-                    style={{
-                        width: "100%",
-                        borderRadius: "12px",
-                        margin: "1rem 0"
-                    }}
-                />
-
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                     {story.genre.map((g, i) => (
                         <Chip
