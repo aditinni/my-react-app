@@ -5,7 +5,7 @@ import AboutAuthor from './pages/AboutAuthor'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/my-react-app">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/story/:id" element={<StoryPage />} />
