@@ -179,7 +179,7 @@ const StoryPage = () => {
                     left: 0,
                     height: "4px",
                     width: `${progress}%`,
-                    background: "linear-gradient(90deg, #ff4d4d, #ffcc00, #00ffcc)",
+                    backgroundColor:  "#842525",
                     zIndex: 9999,
                     transition: "width 0.2s ease"
                 }}
@@ -191,11 +191,11 @@ const StoryPage = () => {
 
                 <div style={{ marginBottom: "14px" }} />
 
-                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+               {/* <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                     {story.genre.map((g, i) => (
                         <Chip key={i} label={g} />
                     ))}
-                </div>
+                </div>*/}
 
                 {/* CONTROLS */}
                 <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", alignItems: "center" }}>
