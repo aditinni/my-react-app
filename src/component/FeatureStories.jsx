@@ -38,12 +38,6 @@ const FeatureStories = () => {
                                 Read
                             </Button>
                         </div>
-
-                        <img
-                            src={featuredStory.image}
-                            className="card-img"
-                            alt=""
-                        />
                     </div>
                 </div>
             )}
@@ -70,7 +64,7 @@ const FeatureStories = () => {
                                             "var(--button-bg-color)",
                                         fontFamily:
                                             "Google Sans, sans-serif",
-                                        width: "25%",
+                                        width: "100%",
                                     }}
                                     onClick={() =>
                                         navigate(`/story/${item.id}`)
@@ -80,11 +74,7 @@ const FeatureStories = () => {
                                 </Button>
                             </div>
 
-                            <img
-                                src={item.image}
-                                className="card-img"
-                                alt=""
-                            />
+                
                         </div>
                     ))}
             </div>
