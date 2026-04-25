@@ -18,37 +18,71 @@ body{
     background-color: var(--primary-bg-color);
     overflow-x:hidden;
 }
-
-/*Navbar design*/
-nav{
-    width: 100vw;
+nav {
+    width: 100%;
     min-height: 60px;
-    background-color: var(--primary-bg-color);  
+    background-color: var(--primary-bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
 }
-nav .nav-flex{
+
+nav .nav-flex {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 12px;
-    gap:'10px';
+    padding: 12px 24px;
     flex-wrap: wrap;
 }
-.nav-flex h1{
+
+.logo {
     font-family: var(--body-font);
     color: var(--primary-text-color);
     font-size: 24px;
+    letter-spacing: 1px;
 }
-.nav-links{
-    display:flex;
-    justify-content: center;
-    align-items: center;
+
+.nav-links {
+    display: flex;
     gap: 18px;
-    flex-wrap: wrap;
+    align-items: center;
 }
+
 .nav-links .link {
-    color: var(--primary-text-color) !important; /* Use !important only to test if it's a specificity issue */
+    color: var(--primary-text-color);
     text-decoration: none;
     font-family: var(--body-font);
+    position: relative;
+    padding: 6px 4px;
+    transition: 0.3s ease;
+}
+
+/* hover animation */
+.nav-links .link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--primary-text-color);
+    transition: 0.3s ease;
+}
+
+.nav-links .link:hover::after {
+    width: 100%;
+}
+
+/* active route */
+.nav-links .active {
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-text-color);
+}
+
+/* hover scale */
+.nav-links .link:hover {
+    transform: translateY(-1px);
 }
 
 /* Home Page */
@@ -142,7 +176,7 @@ nav .nav-flex{
 }
 
 /* Genre chips */
-genre-flex {
+.genre-flex {
     display: flex;
     justify-content: center;  
     align-items: center;

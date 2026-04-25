@@ -12,9 +12,7 @@ import BlueStory from '../assets/s6.pdf';
 
 
 const stories = [
-  
- {
-
+{
   id: 2,
   title: "Frames",
   description:
@@ -22,229 +20,324 @@ const stories = [
   image: framesImg,
   genre: ["Nostalgia", "Emotional", "Family"],
   pdf: FrameStory,
+
   content: [
-    "Kabir, garbed in his formal attire, ready for office, was having his breakfast, a bowl full of milk and cornflakes. A patch of sunlight kissed his half cheek. His attention was divided between the clock in the living room and his breakfast.",
+    `Kabir, garbed in his formal attire, ready for office, was having his breakfast — a bowl full of milk and cornflakes. A patch of sunlight kissed his half cheek. His attention was divided between the clock in the living room and his breakfast. He took spoonfuls one after another, already thinking about the traffic ahead.`,
 
-    "After his daily chores, he came out of his flat. He was locking his door when he saw Mrs. Sharma with her five-year-old son, Rohan.",
+    `After his daily chores, he stepped out of his flat. While locking the door, he noticed Mrs. Sharma standing with her five-year-old son, Rohan.`,
 
-    "Mrs. Sharma greeted him warmly. Rohan’s birthday was today, and Kabir wished him and accepted the invitation to the party.",
+    `“Hello, Mrs. Sharma,” Kabir greeted with a smile.
 
-    "After work, Kabir forgot about the birthday but later remembered it near a bakery. He bought a remote-controlled toy car as a gift.",
+“Hello, Kabir. Leaving for office?”
 
-    "After dealing with traffic, Kabir reached home, freshened up, and was about to relax when Mrs. Sharma knocked on his door.",
+“Yes.”
 
-    "She invited him again, excited for the cake-cutting ceremony. She also asked him to bring his camera to capture the event properly.",
+“Had your breakfast?”
 
-    "Inside her house, Kabir saw Rohan dressed neatly, sitting among guests. A cake was placed on the table, and the celebration was about to begin.",
+“Yeah, I had.”
 
-    "Kabir started taking photos—capturing smiles, family moments, and the joy of celebration.",
+“Today is Rohan’s birthday!” she said, gently patting her son’s head.
 
-    "Rohan received blessings and gifts. The room was filled with laughter and happiness.",
+“Is it? Hey, happy birthday Rohan,” Kabir said, shaking his hand.
 
-    "Later, Kabir clicked a family photo of the Sharmas. Rohan cried briefly, overwhelmed by attention, but the moment was captured beautifully.",
+“Thank you,” Rohan replied.
 
-    "At night, Kabir sat alone in his apartment and sent the photos to his family group, saying the birthday reminded him of them.",
+“You have to come, okay?” Mrs. Sharma invited.
 
-    "His mother replied with old photos of Kabir’s childhood—him sitting on his father’s lap, afraid during a cake-cutting moment, and another where he was surrounded by balloons.",
+“Sure, Mrs. Sharma.”`,
 
-    "Kabir stared at the photos. The silence of his apartment suddenly felt heavier than before, filled with memories he had forgotten."
+    `Kabir left for work, slipping into the rhythm of his day — greetings, meetings, code fixes, and deadlines. By the time he stepped out of the office, he had completely forgotten about the birthday.`,
+
+    `Near a bakery on his way back, the memory resurfaced. He stopped and decided to buy a gift. At a toy shop, he chose a remote-controlled car — the same kind he loved as a child. The salesman demonstrated it moving and responding to controls.
+
+“Please wrap it as a gift,” Kabir requested.
+
+“Sure, sir.”`,
+
+    `After an hour in traffic, Kabir reached home. He loosened his tie, washed his face, and finally exhaled the weight of the day.`,
+
+    `A knock broke the silence. It was Mrs. Sharma, already excited.
+
+“Kabir, are you ready? The cake cutting is in ten minutes!”`,
+
+    `Her eyes shifted to the wall behind his sofa — a gallery of framed memories. Black and white portraits of his parents, candid family moments, fragments of a life preserved in glass.
+
+“I didn’t know you had such beautiful pictures,” she said softly. “You have such a lovely family.”`,
+
+    `“Kabir, could you bring your camera? My phone takes blurry pictures. I want to capture everything properly,” she requested.
+
+“Of course,” he smiled. He picked up his DSLR bag and followed her.`,
+
+    `Inside her home, the atmosphere changed. Rohan sat in a crisp suit and birthday hat, surrounded by guests. The cake stood ready, with a silver pooja plate beside it.`,
+
+    `Kabir moved quietly, camera clicking rhythmically. He captured smiles, greetings, and moments of affection. Elderly guests blessed Rohan, placing envelopes of money into his small hands.`,
+
+    `“Time for the family photo!” someone called.
+
+Mr. and Mrs. Sharma sat together, pulling Rohan between them.
+
+Click. A perfect frame.
+
+Click. Rohan’s expression shifted.
+
+Click. He cried, overwhelmed by attention while his parents laughed softly trying to calm him.`,
+
+    `That night, Kabir sat alone in his apartment. The silence felt heavier after the noise of celebration. He selected photos and sent them to his family group chat.
+
+“Went to a neighbor’s kid’s birthday. It reminded me of you guys.”`,
+
+    `A reply came almost instantly from his mother. Two images appeared.`,
+
+    `The first — a faded photo of young Kabir sitting on his father’s lap, holding a plastic knife, eyes filled with fear during a birthday cake cutting.`,
+
+    `The second — Kabir on his grandfather’s lap, half-hidden behind balloons, staring into the camera with wide, uncertain eyes.`,
+
+    `Kabir stared at the screen.
+
+Then at the quiet walls of his apartment.
+
+And for the first time that day, the silence felt like memory — not emptiness.`
   ]
 },
 {
   id: 3,
-  title: 'Friction',
-  description: 'A story about relationship...between two couples understanding how to forgive',
+  title: "Friction",
+  description: "A story about relationship...between two couples understanding how to forgive",
   image: frictionImg,
-  genre: ['Relationship', 'Emotional', 'Family', 'Romance'],
+  genre: ["Relationship", "Emotional", "Family", "Romance"],
   pdf: FrictionStory,
 
   content: [
-    "The kitchen light buzzed. Sarah’s headache throbbed faster as she leaned against the dining table, letting the day’s frustration spill out.",
+    `The kitchen light buzzed. Sarah’s headache throbbed faster. She leaned against the dining table, still garbed in her coat, letting the day’s humiliation spill out.
 
-    "She described how her boss dismissed her work in front of the entire team after weeks of preparation.",
+“And then he just cut me off in front of the whole team”, Sarah said, her voice trembling. “After three weeks of prep, he did not even let me go to the second slide. He just said that the data was irrelevant.”
 
-    "She looked at her husband Rohan, expecting comfort, but he remained focused on his laptop.",
+She looked at her husband, waiting. She needed him to cross the room and tell her that her boss was an idiot. Instead, Rohan did not look up from his laptop. He was typing furiously.
 
-    "Instead of empathy, Rohan responded with criticism about her data and presentation.",
+“Well, honestly Sarah”, he said, his eyes still focused on the screen. “I told you that your data set was weak. You led with the emotional narrative instead of the Q3 projections.”`,
 
-    "Sarah felt dismissed and unheard, while Rohan continued offering professional advice instead of emotional support.",
+    `Sarah blinked. The air in the space felt suffocated.
 
-    "The conversation escalated. Sarah made it clear she did not need solutions, she needed understanding.",
+“What?” she asked.
 
-    "Rohan insisted he was helping, but Sarah felt reduced to a problem that needed fixing.",
+Rohan got up. He looked practical and completely cold.
 
-    "Unable to take it anymore, she walked out of the house.",
+“I am saying, you should have gone there with leverage. Did you send the follow-up mail which we discussed a couple of days back?”`,
 
-    "Outside, she entered a narrow, rain-washed street lined with glowing luxury stores.",
+    `“Rohan, I am not asking for a strategy session,” Sarah’s voice rose. “I am telling you I am hurt because I was not allowed to justify myself!”
 
-    "Her broken watch reminded her of time, memories, and the distance growing between them.",
+“And I am telling you how to fix it. It is not your home where you give justifications. It is your working place and your work speaks for you. Did you understand?”`,
 
-    "She entered a showroom offering an exchange for a new smartwatch.",
+    `“Stop!” she shouted.
 
-    "But when her old watch triggered a memory of Rohan, she refused the upgrade.",
+“I do not need a career coach right now!” she said, her eyes shimmering. “I walked in that door bleeding and you are trying to give me a lecture on how to hold a knife better!”`,
 
-    "Instead, she walked into a small repair shop opposite the showroom.",
+    `“I am trying to help you! Why do you always quarrel when I am offering a solution?” Rohan defended.
 
-    "An old watchmaker told her the watch was not broken — it was overwhelmed with friction and dust.",
+“Because I am not a problem to be solved right now. I just want you to listen before you start your coaching!”`,
 
-    "He explained how gears stop working when they are under too much pressure and lose balance.",
+    `“I am listening.”
 
-    "He said relationships are similar — they need care, not replacement.",
+“No, you have just started with guidance, just like always!”`,
 
-    "He cleaned and repaired the watch until it started ticking again.",
+    `Sarah walked out, slamming the door behind her.
 
-    "The sound of the watch felt like something inside her had restarted.",
+“Where are you going?” Rohan stepped forward.
 
-    "She walked back home, calmer but emotionally heavy.",
+“Away from your solutions.”`,
 
-    "Rohan was waiting outside. Neither spoke first.",
+    `Outside, she turned into a narrow lane. It was cramped, barely wide enough for crowds, yet pretending to be grand, lined with high-end branded shops.
 
-    "Finally, both apologized at the same time.",
+The road glittered under rain, reflecting neon lights. The whole street hummed with people talking, oblivious to her storm inside.`,
 
-    "Rohan admitted he should have listened instead of trying to fix everything.",
+    `Sarah reached for her watch. It had stopped working. She stared through its scratched glass.
 
-    "Sarah admitted she should not have walked away without talking.",
+She stopped in front of a showroom: “Timeless Luxury, Exchange & Upgrade.”`,
 
-    "Together, they decided to go home — understanding that relationships, like machines, need patience, not perfection."
+    `Inside, a salesman smiled brightly. “Good evening, Ma’am. Looking to upgrade? We have a 50% exchange offer.”
+
+Her phone buzzed. “Rohan” flashed on the screen. Her thumb hovered over decline. She did not answer.`,
+
+    `She handed the watch to the salesman and looked at new smartwatches.
+
+“This one never stops. No winding needed,” he said.
+
+Her eyes fell on the scratch on her old watch — a memory from the day Rohan taught her to ride a bike.
+
+“No,” she whispered, pulling it back.`,
+
+    `She walked out. Opposite the showroom was a dusty shop: “Clockwork Repairs.”`,
+
+    `An elderly man with thick glasses took the watch.
+
+“It just stopped. I think it is broken,” she said.
+
+“It is just overwhelmed,” he replied.`,
+
+    `“Overwhelmed?” she asked.
+
+“These gears work by friction. They push against each other to move. Over time, dust gets in… stress. Too much dust, the friction becomes too hard. They stop listening to each other.”`,
+
+    `“Rohan and I?” she thought.
+
+“You clean the dust, oil the friction, and it starts moving again,” he said.
+
+He wound the watch.
+
+Tick. Tick. Tick.
+
+The heartbeat returned.`,
+
+    `Sarah walked home. The anger was replaced by a quiet ache.`,
+
+    `Rohan was waiting outside.
+
+Neither spoke for a moment.
+
+Then both said at the same time: “I am sorry.”`,
+
+    `Rohan smiled faintly.
+
+“I should not have tried to fix you. I should have just held you.”`,
+
+    `“I should not have walked out,” Sarah whispered.`,
+
+    `“Let’s go home. It is bitterly cold outside,” Rohan said.`
   ]
 },
-  {
+{
   id: 4,
-  title: 'Home, Once in a While',
-  description: 'A story about a boy whose mother visits him after a long time and at the end he misses being at home',
+  title: "Home, Once in a While",
+  description:
+    "A story about a man in a fast-moving city who reconnects with his mother and rediscovers the meaning of home.",
   image: homeImg,
-  genre: ['Nostalgia', 'Emotional', 'Family'],
+  genre: ["Nostalgia", "Emotional", "Family"],
   pdf: HomeStory,
 
   content: [
-    "A bustling city is always a hustling one, a busy one where time is neither absolute nor relative. Time is not measured in hours, minutes, seconds or dates but in the magnitude of work that keeps the city running.",
+    `A bustling city never slows down. Time here is not measured in hours or days, but in deadlines, meetings, and unfinished work. Ankit had been living in this rhythm for two years, slowly forgetting what stillness felt like.`,
 
-    "Ankit has been working here for the last two years and has not visited his native place since then. His mother was coming to see him for a family ceremony.",
+    `He had not visited his hometown in all that time. His mother, however, was coming to see him for a family ceremony. On call, she informed him she had landed and would reach his place soon. Ankit apologized for not being able to pick her up because of an important meeting.`,
 
-    "“Landed?” Ankit asked.",
-    "“Yes,” his mother replied. “I just have to collect my luggage and catch a cab.”",
+    `After work, he got stuck in heavy traffic as usual. On his way home, he finally remembered her visit. He stopped at a shop and bought something simple — not expensive, but meaningful. A small gesture from a past he rarely revisited.`,
 
-    "Ankit apologized for not being able to receive her due to an important meeting.",
+    `When he reached home, he quickly freshened up. A knock interrupted the silence. His mother stood at the door, smiling as if no time had passed at all.`,
 
-    "After a long day stuck in traffic, he finally reached home. His mother had already arrived and cleaned the flat.",
+    `The house suddenly felt different with her presence. She noticed how clean everything was and gently commented on it. Ankit insisted he could have managed, but she dismissed it lightly, saying she had time and wanted to help.`,
 
-    "He was surprised and said, “There was no need to clean everything!”",
-    "She replied, “It was not a heavy task. I was free anyway.”",
+    `They sat together in the balcony. Below them, children played freely in the society playground. Laughter rose into the evening air. His mother reminded him of how he used to rush to play cricket every evening as a child.`,
 
-    "They sat together in the balcony, watching children play in the society ground as the evening sun went down.",
+    `Ankit smiled, saying those days felt like a distant memory now. The wind brushed his face, carrying fragments of his childhood he had stopped noticing.`,
 
-    "His mother reminded him of his childhood cricket days. Ankit smiled, saying it felt like a long-lost life.",
+    `His mother then brought out an old photo album. Ankit suggested she could have sent the pictures digitally, but she disagreed. She said memories felt different when held in hands, when pages were turned slowly instead of swiped.`,
 
-    "She brought out an old photo album. Instead of digital photos, she wanted him to relive memories through pages.",
+    `Together, they flipped through the album. Each photograph brought back stories, laughter, and moments that had quietly faded over time. For a while, the apartment was no longer silent.`,
 
-    "They spent hours flipping through photos, laughing together after a long time.",
+    `The next day, Ankit took his mother out. At a mall, she hesitated at the escalator, unsure of stepping onto it. After a few attempts and a short wait, they took the elevator instead.`,
 
-    "On the weekend, Ankit took his mother to the city mall. She struggled with the escalator, preferring the lift instead.",
+    `They visited a restaurant where unfamiliar dishes confused her. Ankit explained the menu, but she eventually asked him to just order something simple. The food was new, but her comfort remained rooted in familiarity.`,
 
-    "They went to a restaurant where she found the menu confusing and asked him to order for her.",
+    `They attended a family blessing ceremony the following day. The courtyard was filled with flowers, music, and laughter. His mother joined a group of women singing folk songs, her voice blending effortlessly with theirs.`,
 
-    "She tried pasta for the first time but said she would prefer simple Indian food next time.",
+    `Ankit stood watching her. For the first time in a long while, he saw her not just as his mother, but as someone deeply connected to a world he had slowly drifted away from.`,
 
-    "Later, they attended a blessing ceremony filled with music, food, and family warmth.",
+    `She looked at him mid-song and asked if he remembered the tune from their visits to his grandfather’s house. He nodded, though the memory felt both distant and vivid at the same time.`,
 
-    "His mother sang folk songs with other women, her voice full of joy and nostalgia.",
+    `Later, she asked when he would come back home properly. Ankit hesitated. The question stayed with him longer than the conversation itself.`,
 
-    "She asked him, “When will you come home?”",
+    `The next morning, she left for the airport while Ankit left for work. They did not have time for a long goodbye. Life moved on, as it always did.`,
 
-    "Ankit hesitated and replied softly, “I don’t know.”",
+    `When Ankit returned home that evening, the apartment felt heavier than usual. The mess on the sofa, the silence in the room, everything reminded him of her absence.`,
 
-    "For the first time, he realized how far he had drifted from home.",
+    `For the first time in years, he felt something quietly pull him inward — not toward work, not toward the city — but toward something he had been avoiding thinking about.`,
 
-    "The next morning, she left for the airport while he rushed to work.",
-
-    "That evening, he returned to an empty flat. The silence felt heavier than usual.",
-
-    "For the first time in years, he felt the real meaning of home, not a place, but a feeling he had lost."
+    `Home.`
   ]
-},
+}
+ ,
   {
   id: 5,
   title: "The Currency of a Blue Balloon",
-  description: "A story about a man who plays accordion to survive. He meets a school going boy and builds an unspoken connection",
+  description:
+    "A story about a man who plays accordion to survive. He meets a school-going boy and builds an unspoken emotional connection.",
   image: blueImg,
   genre: ["Emotional"],
   pdf: BlueStory,
+
   content: [
-    "The day had called off, the sun was ready to wrap its arm around the name of sunset, signaling the world that the day had come to rest. The sky too was ready to embrace itself into the dusky color.",
+    `The day had begun to fade. The sun leaned toward sunset, as if the world itself was preparing to rest. The sky slowly dissolved into dusky colors, soft and quiet.`,
 
-    "On the bench near the pavement sat a man dressed in a black coat, crisp white shirt, a pair of black trousers and a black bow tie. Although his shoes appeared to have a layer of dust on its shiny surface.",
+    `On a bench near the pavement sat a man in a black coat, white shirt, and black bow tie. His clothes were neat, but his shoes carried the dust of long wandering days.`,
 
-    "He was holding a black hat in his hand, taking out some coins and seldom a note out of it. He was counting them and kept them aside on the bench.",
+    `He held a black hat in his hands, counting coins and a few crumpled notes. He placed them carefully on the bench beside him.`,
 
-    "“Again I am short of a few bucks!” the man muttered.",
+    `“Again I am short of a few bucks,” he muttered.`,
 
-    "He got up and went straight to a food outlet nearby. The place buzzed with the aroma of freshly prepared food. The space was congested with a ton of people around waiting for their orders.",
+    `He walked to a nearby food outlet. The place was crowded, filled with the smell of fresh food and impatient voices waiting for their orders.`,
 
-    "“Hey, can I get that? How much does it cost?” the man pointed out.",
+    `“Hey, can I get that? How much does it cost?” he asked, pointing at the food.`,
 
-    "“Fifty bucks gentleman”, answered the vendor.",
+    `“Fifty bucks, gentleman,” the vendor replied.`,
 
-    "“Forty eight bucks..!” The man counted his money again.",
+    `“Forty-eight bucks…” the man counted again, searching his hat desperately.`,
 
-    "“Could you please lend me it for forty eight bucks?” he asked.",
+    `“Could you please give it for forty-eight bucks? I’ll return the two tomorrow,” he pleaded.`,
 
-    "“What do you mean? I am here to do business not charity”, answered the vendor.",
+    `“This is business, not charity,” the vendor said firmly.`,
 
-    "“I’ll return you those two bucks tomorrow, for sure”, begged the man.",
+    `The man walked away, empty-handed. That night, he made a pillow from folded newspapers and used two more as a blanket. The streetlight flickered through the night as he tried to sleep.`,
 
-    "The man went to the park to call his day off. He had a pile of newspapers out of which he prepared his pillow and used two newspapers as his blanket.",
+    `The next morning, he stood on the pavement and played his accordion. The air around him vibrated with music, though most people walked past without noticing.`,
 
-    "The next morning, he stood on the pavement playing his accordion. The space around him seemed to vibrate with his music.",
+    `A few coins dropped into his hat. A few folded notes followed silently.`,
 
-    "Though most people passed by without paying attention, a few dropped coins into his hat. Some left folded notes quietly.",
+    `Then a boy in a school uniform stopped in front of him. His eyes sparkled with admiration.`,
 
-    "A boy in a school uniform stopped in front of him, admiration shining in his eyes.",
+    `The man smiled and gently pulled the boy’s cheek. He played louder, more alive than before.`,
 
-    "The man smiled, pulled the boy’s cheek gently, and began playing even more beautifully.",
+    `The boy showed his empty pockets. The man simply smiled.`,
 
-    "The boy showed his empty pockets. The man simply smiled.",
+    `After a while, the boy waved goodbye. That small smile stayed behind long after he left.`,
 
-    "Before leaving, the boy turned back and waved. That smile stayed with the man.",
+    `That night, despite being short on money again, the man returned the vendor’s two bucks and slept hungry.`,
 
-    "That night, though still short on money, he returned the vendor’s two bucks and slept hungry.",
+    `The next day, the boy returned with his father. The father stood distant, but the boy was fully absorbed in the music.`,
 
-    "The next day, the boy returned with his father. The father seemed uninterested, but the boy enjoyed every note.",
+    `When the performance ended, the father offered money. But the boy stepped forward holding a blue balloon.`,
 
-    "When the performance ended, the father offered money. But the boy extended a blue balloon.",
+    `The man looked at it for a moment… then refused the money and accepted the balloon instead.`,
 
-    "The man refused the money and accepted the balloon instead.",
+    `“Where do you live?” the man asked.`,
 
-    "“Where do you live sir?” the man asked.",
+    `“Next to that street,” the father replied.`,
 
-    "“Next to that street,” the father replied.",
+    `The boy waved before disappearing.`,
 
-    "The boy waved again before leaving.",
+    `The next day, two policemen arrived and questioned the man. They said his music disturbed the public and forcefully took his earnings.`,
 
-    "The next day, two policemen approached the man and questioned him.",
+    `They threw him aside. He lay unconscious on the pavement.`,
 
-    "They claimed his music disturbed the public and forcefully took his money, throwing him aside.",
+    `When he woke up, the morning was already breaking. Bruised and tired, he still picked up his accordion and returned to his spot.`,
 
-    "He woke up injured the next morning but still returned to play his accordion.",
+    `But the boy did not come.`,
 
-    "However, the boy did not come that day.",
+    `Worried, the man followed the address and found the boy’s home.`,
 
-    "Worried, the man went looking for him and found the boy’s father.",
+    `“Your son did not come today?” he asked.`,
 
-    "“Your son did not come today?” he asked.",
+    `The father replied softly, “He is not well. The cold affected him.”`,
 
-    "“He is not well. The cold weather affected him,” the father replied softly.",
+    `Just then, the boy appeared at the gate wrapped in a blanket.`,
 
-    "The boy appeared at the gate, wrapped in a blanket.",
+    `The man smiled gently. “You should have come today.”`,
 
-    "The man smiled and said, “You should have come today.”",
+    `The father said quietly, “He cannot speak or hear… he is deaf and mute.”`,
 
-    "His father spoke with quiet sorrow: “He can neither speak nor hear… he is deaf and mute.”",
+    `The boy stepped forward holding a small paper accordion.`,
 
-    "The boy stepped forward, holding a small paper accordion.",
+    `He hugged the man tightly, tears rolling down his cheeks.`,
 
-    "He hugged the man tightly, tears running down his cheeks.",
-
-    "In that moment, the man felt a warmth in his heart that no words could express."
+    `And in that moment, the man felt a warmth inside him that no words could ever carry.`
   ]
 }
 ];

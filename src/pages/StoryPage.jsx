@@ -23,6 +23,7 @@ const StoryPage = () => {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [speed, setSpeed] = useState(1);
     const [activeIndex, setActiveIndex] = useState(null);
+    const [activeSentenceIndex, setActiveSentenceIndex] = useState(null); // ✅ ADDED
     const [progress, setProgress] = useState(0);
     const [completed, setCompleted] = useState(false);
     const [fullScreen, setFullScreen] = useState(false);
@@ -33,6 +34,7 @@ const StoryPage = () => {
         window.speechSynthesis.cancel();
         setIsSpeaking(false);
         setActiveIndex(null);
+        setActiveSentenceIndex(null);
         setProgress(0);
         setCompleted(false);
         return () => window.speechSynthesis.cancel();
@@ -95,6 +97,7 @@ const StoryPage = () => {
         );
     }
 
+    /* 🎧 SPEECH WITH SENTENCE TRACKING + SMOOTH SCROLL */
     const handleSpeak = () => {
         window.speechSynthesis.cancel();
 
@@ -103,24 +106,55 @@ const StoryPage = () => {
             return;
         }
 
-        const utterances = story.content.map((text, index) => {
-            const u = new SpeechSynthesisUtterance(text);
-            u.rate = speed;
-            u.onstart = () => setActiveIndex(index);
-            return u;
+        let sentences = [];
+
+        story.content.forEach((para, pIndex) => {
+            para.split(/(?<=[.!?])\s/).forEach((s) => {
+                sentences.push({
+                    text: s,
+                    paraIndex: pIndex
+                });
+            });
         });
+
+        let index = 0;
+
+        const speakNext = () => {
+            if (index >= sentences.length) {
+                setIsSpeaking(false);
+                setActiveIndex(null);
+                setActiveSentenceIndex(null);
+                return;
+            }
+
+            const current = sentences[index];
+
+            const utter = new SpeechSynthesisUtterance(current.text);
+            utter.rate = speed;
+
+            utter.onstart = () => {
+                setActiveIndex(current.paraIndex);
+                setActiveSentenceIndex(index);
+
+                // 📍 SMOOTH SCROLL
+                document
+                    .getElementById(`para-${current.paraIndex}`)
+                    ?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+            };
+
+            utter.onend = () => {
+                index++;
+                speakNext();
+            };
+
+            window.speechSynthesis.speak(utter);
+        };
 
         setIsSpeaking(true);
-
-        utterances.forEach((u, i) => {
-            if (i < utterances.length - 1) {
-                u.onend = () => window.speechSynthesis.speak(utterances[i + 1]);
-            } else {
-                u.onend = () => setIsSpeaking(false);
-            }
-        });
-
-        window.speechSynthesis.speak(utterances[0]);
+        speakNext();
     };
 
     const toggleFullScreen = () => {
@@ -168,10 +202,9 @@ const StoryPage = () => {
             color: darkMode ? "#e5e5e5" : "#2D3748",
             minHeight: "100vh"
         }}>
-
             <Navbar />
 
-            {/* 🔥 PROGRESS BAR (NEW) */}
+            {/* PROGRESS BAR */}
             <div
                 style={{
                     position: "fixed",
@@ -179,23 +212,14 @@ const StoryPage = () => {
                     left: 0,
                     height: "4px",
                     width: `${progress}%`,
-                    backgroundColor:  "#842525",
+                    backgroundColor: "#842525",
                     zIndex: 9999,
                     transition: "width 0.2s ease"
                 }}
             />
 
             <div style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
-
                 <h1>{story.title}</h1>
-
-                <div style={{ marginBottom: "14px" }} />
-
-               {/* <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-                    {story.genre.map((g, i) => (
-                        <Chip key={i} label={g} />
-                    ))}
-                </div>*/}
 
                 {/* CONTROLS */}
                 <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", alignItems: "center" }}>
@@ -236,20 +260,66 @@ const StoryPage = () => {
                     lineHeight: 2,
                     fontFamily: "Georgia, serif"
                 }}>
-                    {story.content.map((para, i) => (
-                        <p
-                            key={i}
-                            style={{
-                                padding: "10px",
-                                borderRadius: "8px",
-                                background: activeIndex === i
-                                    ? darkMode ? "#1e1e1e" : "#f1f1f1"
-                                    : "transparent"
-                            }}
-                        >
-                            {para}
-                        </p>
-                    ))}
+                    {story.content.map((para, i) => {
+                        const isActive = activeIndex === i;
+
+                        const sentences = para.split(/(?<=[.!?])\s/);
+
+                        let sentenceOffset = 0;
+                        for (let k = 0; k < i; k++) {
+                            sentenceOffset += story.content[k].split(/(?<=[.!?])\s/).length;
+                        }
+
+                        return (
+                            <p
+                                id={`para-${i}`}
+                                key={i}
+                                style={{
+                                    padding: "10px",
+                                    borderRadius: "8px",
+
+                                    // 🌫️ FOCUS MODE
+                                    opacity:
+                                        activeIndex !== null && !isActive ? 0.35 : 1,
+                                    filter:
+                                        activeIndex !== null && !isActive
+                                            ? "blur(1px)"
+                                            : "none",
+
+                                    background: isActive
+                                        ? darkMode
+                                            ? "#1e1e1e"
+                                            : "#f1f1f1"
+                                        : "transparent",
+
+                                    transition: "0.3s ease"
+                                }}
+                            >
+                                {sentences.map((sentence, si) => {
+                                    const globalIndex = sentenceOffset + si;
+
+                                    const isSentenceActive =
+                                        activeSentenceIndex === globalIndex;
+
+                                    return (
+                                        <span
+                                            key={si}
+                                            style={{
+                                                background: isSentenceActive
+                                                    ? "#ffcc66"
+                                                    : "transparent",
+                                                padding: "2px 4px",
+                                                borderRadius: "4px",
+                                                transition: "0.2s"
+                                            }}
+                                        >
+                                            {sentence + " "}
+                                        </span>
+                                    );
+                                })}
+                            </p>
+                        );
+                    })}
                 </div>
             </div>
 
