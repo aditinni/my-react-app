@@ -23,9 +23,10 @@ const StoryPage = () => {
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [speed, setSpeed] = useState(1);
     const [activeIndex, setActiveIndex] = useState(null);
+    const [fullScreen, setFullScreen] = useState(false);
+
     const [progress, setProgress] = useState(0);
     const [completed, setCompleted] = useState(false);
-    const [fullScreen, setFullScreen] = useState(false);
 
     const speechRef = useRef(null);
 
@@ -35,27 +36,30 @@ const StoryPage = () => {
         setActiveIndex(null);
         setProgress(0);
         setCompleted(false);
+
+        return () => window.speechSynthesis.cancel();
     }, [id]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
 
-    /* PROGRESS */
+    /* 📊 SCROLL PROGRESS */
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.scrollY;
             const docHeight =
                 document.documentElement.scrollHeight - window.innerHeight;
 
-            setProgress((scrollTop / docHeight) * 100);
+            const scrolled = (scrollTop / docHeight) * 100;
+            setProgress(scrolled);
         };
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    /* CONFETTI */
+    /* 🎆 FIRECRACKER ON COMPLETION */
     useEffect(() => {
         if (progress > 98 && !completed) {
             setCompleted(true);
@@ -71,10 +75,15 @@ const StoryPage = () => {
                     spread: 90,
                     startVelocity: 35,
                     colors,
-                    origin: { x: Math.random(), y: Math.random() * 0.6 }
+                    origin: {
+                        x: Math.random(),
+                        y: Math.random() * 0.6
+                    }
                 });
 
-                if (Date.now() < end) requestAnimationFrame(frame);
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
             };
 
             frame();
@@ -82,13 +91,17 @@ const StoryPage = () => {
     }, [progress, completed]);
 
     if (!story) {
-        return <h2 style={{ textAlign: "center" }}>Story Not Found</h2>;
+        return (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <h2>❌ Story Not Found</h2>
+            </div>
+        );
     }
 
-    /* AUDIO */
     const handleSpeak = () => {
+        window.speechSynthesis.cancel();
+
         if (isSpeaking) {
-            window.speechSynthesis.cancel();
             setIsSpeaking(false);
             return;
         }
@@ -96,51 +109,30 @@ const StoryPage = () => {
         const utterances = story.content.map((text, index) => {
             const u = new SpeechSynthesisUtterance(text);
             u.rate = speed;
-
             u.onstart = () => setActiveIndex(index);
-
             return u;
         });
 
+        setIsSpeaking(true);
+
         utterances.forEach((u, i) => {
             if (i < utterances.length - 1) {
-                u.onend = () =>
-                    window.speechSynthesis.speak(utterances[i + 1]);
+                u.onend = () => window.speechSynthesis.speak(utterances[i + 1]);
             } else {
-                u.onend = () => {
-                    setIsSpeaking(false);
-                    setActiveIndex(null);
-                };
+                u.onend = () => setIsSpeaking(false);
             }
         });
 
-        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(utterances[0]);
-        setIsSpeaking(true);
     };
 
-    /* 🔥 FIXED FULLSCREEN (IMPORTANT CHANGE) */
-    const toggleFullScreen = async () => {
-        try {
-            const elem = document.documentElement;
-
-            if (!document.fullscreenElement) {
-                if (elem.requestFullscreen) {
-                    await elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) {
-                    await elem.webkitRequestFullscreen(); // Safari
-                }
-                setFullScreen(true);
-            } else {
-                if (document.exitFullscreen) {
-                    await document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    await document.webkitExitFullscreen();
-                }
-                setFullScreen(false);
-            }
-        } catch (err) {
-            console.log("Fullscreen error:", err);
+    const toggleFullScreen = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+            setFullScreen(true);
+        } else {
+            document.exitFullscreen();
+            setFullScreen(false);
         }
     };
 
@@ -170,43 +162,62 @@ const StoryPage = () => {
         background: speed === val
             ? "#CC7A6B"
             : darkMode ? "#2a2a2a" : "#e0e0e0",
-        color: speed === val ? "#fff" : darkMode ? "#e5e5e5" : "#333"
+        color: speed === val
+            ? "#fff"
+            : darkMode ? "#e5e5e5" : "#333"
     });
 
     return (
-        <div style={{
-            background: darkMode ? "#121212" : "#fdfbf7",
-            color: darkMode ? "#e5e5e5" : "#2D3748",
-            minHeight: "100vh"
-        }}>
+        <div
+            style={{
+                background: darkMode ? "#121212" : "#fdfbf7",
+                color: darkMode ? "#e5e5e5" : "#2D3748",
+                minHeight: "100vh"
+            }}
+        >
             <Navbar />
 
-            <div style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                height: "4px",
-                width: `${progress}%`,
-                background: "#CC7A6B",
-                zIndex: 9999
-            }} />
+            {/* 📊 PROGRESS BAR */}
+            <div
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    height: "4px",
+                    width: `${progress}%`,
+                    background: "#CC7A6B",
+                    zIndex: 9999,
+                    transition: "width 0.2s"
+                }}
+            />
 
             <div style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
                 <h1>{story.title}</h1>
 
-                <img src={story.image} style={{
-                    width: "100%",
-                    borderRadius: "12px",
-                    margin: "1rem 0"
-                }} />
+                <img
+                    src={story.image}
+                    style={{
+                        width: "100%",
+                        borderRadius: "12px",
+                        margin: "1rem 0"
+                    }}
+                />
+
+                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+                    {story.genre.map((g, i) => (
+                        <Chip
+                            key={i}
+                            label={g}
+                            sx={{
+                                backgroundColor: darkMode ? "#2a2a2a" : "#f0f0f0",
+                                color: darkMode ? "#e5e5e5" : "#2D3748"
+                            }}
+                        />
+                    ))}
+                </div>
 
                 {/* CONTROLS */}
-                <div style={{
-                    display: "flex",
-                    gap: "1rem",
-                    marginTop: "1rem",
-                    alignItems: "center"
-                }}>
+                <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
                     <div onClick={() => setDarkMode(!darkMode)}>
                         {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
                     </div>
@@ -214,53 +225,37 @@ const StoryPage = () => {
                     <TextIncreaseIcon onClick={() => setFontSize(p => Math.min(p + 0.1, 1.8))} />
                     <TextDecreaseIcon onClick={() => setFontSize(p => Math.max(p - 0.1, 1))} />
 
-                    {/* FULLSCREEN FIXED */}
-                    <div onClick={toggleFullScreen} style={{ cursor: "pointer" }}>
-                        <FullscreenIcon />
-                    </div>
-                </div>
-
-                {/* AUDIO */}
-                <div style={{
-                    marginTop: "1.5rem",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem"
-                }}>
-                    <div onClick={handleSpeak} style={{ cursor: "pointer" }}>
-                        {isSpeaking ? <PauseIcon /> : <PlayArrowIcon />}
-                    </div>
-
-                    <Waveform active={isSpeaking} />
-
-                    <div style={{ display: "flex", gap: "6px" }}>
-                        <span style={speedBtnStyle(0.75)} onClick={() => setSpeed(0.75)}>0.75x</span>
-                        <span style={speedBtnStyle(1)} onClick={() => setSpeed(1)}>1x</span>
-                        <span style={speedBtnStyle(1.5)} onClick={() => setSpeed(1.5)}>1.5x</span>
-                    </div>
+                    <FullscreenIcon onClick={toggleFullScreen} />
                 </div>
 
                 {/* STORY */}
-                <div style={{
-                    marginTop: "2rem",
-                    fontSize: `${fontSize}rem`,
-                    lineHeight: 2,
-                    fontFamily: "Georgia, serif"
-                }}>
+                <div
+                    style={{
+                        marginTop: "2rem",
+                        fontSize: `${fontSize}rem`,
+                        lineHeight: 2,
+                        fontFamily: "Georgia, serif"
+                    }}
+                >
                     {story.content.map((para, i) => (
-                        <p key={i} style={{
-                            padding: "10px",
-                            borderRadius: "8px",
-                            background: activeIndex === i
-                                ? darkMode ? "#1e1e1e" : "#f1f1f1"
-                                : "transparent"
-                        }}>
+                        <p
+                            key={i}
+                            style={{
+                                padding: "10px",
+                                borderRadius: "8px",
+                                background:
+                                    activeIndex === i
+                                        ? darkMode ? "#1e1e1e" : "#f1f1f1"
+                                        : "transparent"
+                            }}
+                        >
                             {para}
                         </p>
                     ))}
                 </div>
             </div>
 
+            {/* ANIMATION */}
             <style>
                 {`
                 @keyframes wave {
