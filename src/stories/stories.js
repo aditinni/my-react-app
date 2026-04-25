@@ -23,7 +23,7 @@ const stories = [
   genre: ["Nostalgia", "Emotional", "Family"],
   pdf: FrameStory,
   content: [
-    "Kabir, garbed in his formal attire, ready for office, was having his breakfast—a bowl full of milk and cornflakes. A patch of sunlight kissed his half cheek. His attention was divided between the clock in the living room and his breakfast.",
+    "Kabir, garbed in his formal attire, ready for office, was having his breakfast, a bowl full of milk and cornflakes. A patch of sunlight kissed his half cheek. His attention was divided between the clock in the living room and his breakfast.",
 
     "After his daily chores, he came out of his flat. He was locking his door when he saw Mrs. Sharma with her five-year-old son, Rohan.",
 
