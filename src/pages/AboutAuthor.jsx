@@ -1,63 +1,58 @@
 import React from "react";
-import Navbar from "../component/Navbar"
-import "../App.css"
+import Navbar from "../component/Navbar";
+import "../App.css";
 
 const AboutAuthor = () => {
     return (
         <>
-        <Navbar/>
-        <div style={styles.page}>
+            <Navbar />
 
-            <div style={styles.container}>
+            <div style={styles.page}>
+                <div style={styles.container}>
 
-                {/* LEFT SIDE */}
-                <div style={styles.left}>
+                    <div style={styles.left}>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+                            alt="author illustration"
+                            style={{ ...styles.avatar, ...styles.floating }}
+                        />
 
-         <img
-    src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-    alt="author illustration"
-    style={{ ...styles.avatar, ...styles.floating }}
-/>
+                        <h2 style={styles.title}>ABOUT THE AUTHOR:</h2>
+                        <h3 style={styles.name}>Aditya Raj</h3>
+                    </div>
 
-                    <h2 style={styles.title}>ABOUT THE AUTHOR:</h2>
-                    <h3 style={styles.name}>Aditya Raj</h3>
+                    <div style={styles.right}>
 
-                   
+                        <section style={styles.section}>
+                            <h3 style={styles.heading}>My Writing Journey</h3>
+                            <p style={styles.text}>
+                                I am writing stories based on human emotions, relationships,
+                                and everyday life. My writing explores nostalgia, connection,
+                                and the small moments that shape us.
+                            </p>
+                        </section>
 
-                </div>
+                        <section style={styles.section}>
+                            <h3 style={styles.heading}>What Inspires Me</h3>
+                            <p style={styles.text}>
+                                Life inspires me, conversations, silence, memories, and people
+                                I meet. I try to capture emotions that often go unnoticed but
+                                stay with us forever.
+                            </p>
+                        </section>
 
-              
-                <div style={styles.right}>
+                        <section style={styles.section}>
+                            <h3 style={styles.heading}>Welcome to My Story Nook</h3>
+                            <p style={styles.text}>
+                                I hope you find comfort and reflection in my work, and that
+                                my stories make you pause and feel something real.
+                            </p>
+                        </section>
 
-                    <section style={styles.section}>
-                        <h3 style={styles.heading}>My Writing Journey</h3>
-                        <p style={styles.text}>
-                            I am writing stories based on human emotions, relationships,
-                            and everyday life. My writing explores nostalgia, connection,
-                            and the small moments that shape us.
-                        </p>
-                    </section>
-
-                    <section style={styles.section}>
-                        <h3 style={styles.heading}>What Inspires Me</h3>
-                        <p style={styles.text}>
-                            Life inspires me, conversations, silence, memories, and people
-                            I meet. I try to capture emotions that often go unnoticed but
-                            stay with us forever.
-                        </p>
-                    </section>
-
-                    <section style={styles.section}>
-                        <h3 style={styles.heading}>Welcome to My Story Nook</h3>
-                        <p style={styles.text}>
-                            I hope you find comfort and reflection in my work, and that
-                            my stories make you pause and feel something real.
-                        </p>
-                    </section>
+                    </div>
 
                 </div>
             </div>
-        </div>
         </>
     );
 };
@@ -76,7 +71,8 @@ const styles = {
         display: "flex",
         maxWidth: "1000px",
         width: "100%",
-        gap: "60px"
+        gap: "60px",
+        alignItems: "center"
     },
 
     left: {
@@ -95,6 +91,10 @@ const styles = {
         marginBottom: "20px"
     },
 
+    floating: {
+        animation: "float 4s ease-in-out infinite"
+    },
+
     title: {
         fontSize: "14px",
         letterSpacing: "2px",
@@ -105,17 +105,6 @@ const styles = {
         fontSize: "16px",
         marginTop: "6px",
         fontWeight: "500"
-    },
-
-    socials: {
-        marginTop: "15px",
-        display: "flex",
-        gap: "12px"
-    },
-
-    icon: {
-        cursor: "pointer",
-        color: "#444"
     },
 
     right: {
@@ -138,7 +127,6 @@ const styles = {
         color: "#555",
         textAlign: "justify"
     }
-    
 };
 
 export default AboutAuthor;

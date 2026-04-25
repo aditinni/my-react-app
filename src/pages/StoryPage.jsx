@@ -119,12 +119,9 @@ const StoryPage = () => {
                 transition: "0.3s ease"
             }}
         >
-
-            {/* NAVBAR ALWAYS VISIBLE */}
             <Navbar />
 
             <div style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
-
                 <h1>{story.title}</h1>
 
                 <img
@@ -161,39 +158,62 @@ const StoryPage = () => {
                     <FullscreenIcon onClick={toggleFullScreen} style={{ cursor: "pointer" }} />
                 </div>
 
-                {/* AUDIO PLAYER */}
-                <div style={{
-                    marginTop: "1.2rem",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                    padding: "12px 14px",
-                    borderRadius: "12px",
-                    background: darkMode ? "#1a1a1a" : "#f2f2f2"
-                }}>
-
+                {/* AUDIO PLAYER (RESPONSIVE FIXED) */}
+                <div
+                    style={{
+                        marginTop: "1.2rem",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                        padding: "12px 14px",
+                        borderRadius: "12px",
+                        background: darkMode ? "#1a1a1a" : "#f2f2f2",
+                        flexWrap: "wrap"
+                    }}
+                >
+                    {/* PLAY */}
                     <div onClick={handleSpeak} style={{ cursor: "pointer" }}>
                         {isSpeaking ? <PauseIcon /> : <PlayArrowIcon />}
                     </div>
 
-                    <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                    {/* WAVEFORM */}
+                    <div style={{ flex: 1, display: "flex", justifyContent: "center", minWidth: "120px" }}>
                         <Waveform active={isSpeaking} />
                     </div>
 
-                    <div style={{ display: "flex", gap: "6px" }}>
-                        <span style={speedBtnStyle(0.75)} onClick={() => setSpeed(0.75)}>0.75x</span>
-                        <span style={speedBtnStyle(1)} onClick={() => setSpeed(1)}>1x</span>
-                        <span style={speedBtnStyle(1.5)} onClick={() => setSpeed(1.5)}>1.5x</span>
+                    {/* SPEED CONTROLS */}
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "6px",
+                            flexWrap: "wrap",
+                            justifyContent: "center",
+                            minWidth: "140px"
+                        }}
+                    >
+                        <span style={speedBtnStyle(0.75)} onClick={() => setSpeed(0.75)}>
+                            0.75x
+                        </span>
+
+                        <span style={speedBtnStyle(1)} onClick={() => setSpeed(1)}>
+                            1x
+                        </span>
+
+                        <span style={speedBtnStyle(1.5)} onClick={() => setSpeed(1.5)}>
+                            1.5x
+                        </span>
                     </div>
                 </div>
 
                 {/* STORY */}
-                <div style={{
-                    marginTop: "2rem",
-                    fontSize: `${fontSize}rem`,
-                    lineHeight: 2,
-                    fontFamily: "Georgia, serif"
-                }}>
+                <div
+                    style={{
+                        marginTop: "2rem",
+                        fontSize: `${fontSize}rem`,
+                        lineHeight: 2,
+                        fontFamily: "Georgia, serif"
+                    }}
+                >
                     {story.content.map((para, i) => (
                         <p
                             key={i}
@@ -209,7 +229,6 @@ const StoryPage = () => {
                         </p>
                     ))}
                 </div>
-
             </div>
 
             <style>
