@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import stories from "../stories/stories.js";
 import Navbar from "../component/Navbar";
 import Chip from "@mui/material/Chip";
@@ -17,7 +17,9 @@ import confetti from "canvas-confetti";
 
 const StoryPage = () => {
     const { id } = useParams();
-    const story = stories.find((s) => s.id === Number(id));
+
+    const [story, setStory] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const [darkMode, setDarkMode] = useState(false);
     const [fontSize, setFontSize] = useState(1.2);
@@ -28,21 +30,94 @@ const StoryPage = () => {
     const [completed, setCompleted] = useState(false);
     const [fullScreen, setFullScreen] = useState(false);
 
+
     const speechRef = useRef(null);
 
+    const getGenreStyle = (genre, darkMode) => {
+    const base = {
+        fontWeight: 600,
+        color: "#fff",
+        border: "none",
+        transition: "0.3s ease",
+        boxShadow: "0 6px 18px rgba(0,0,0,0.15)"
+    };
+
+    switch (genre.toLowerCase()) {
+        case "romance":
+            return {
+                ...base,
+                background: "linear-gradient(135deg, #ff6b9d, #ff9a8b)",
+                boxShadow: "0 0 12px rgba(255, 107, 157, 0.6)"
+            };
+
+        case "horror":
+            return {
+                ...base,
+                background: "linear-gradient(135deg, #2c3e50, #000000)",
+                boxShadow: "0 0 12px rgba(0, 0, 0, 0.8)"
+            };
+
+        case "relationship":
+            return {
+                ...base,
+                background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+                boxShadow: "0 0 12px rgba(106, 17, 203, 0.6)"
+            };
+
+        case "family":
+            return {
+                ...base,
+                background: "linear-gradient(135deg, #ff512f, #dd2476)",
+                boxShadow: "0 0 12px rgba(221, 36, 118, 0.6)"
+            };
+
+        case "nostalgia":
+            return {
+                ...base,
+                background: "linear-gradient(135deg, #7f00ff, #e100ff)",
+                boxShadow: "0 0 12px rgba(127, 0, 255, 0.6)"
+            };
+
+        case "emotional":
+            return {
+                ...base,
+                background: "linear-gradient(135deg, #3a7bd5, #3a6073)",
+                boxShadow: "0 0 12px rgba(58, 123, 213, 0.6)"
+            };
+
+        default:
+            return {
+                ...base,
+                background: darkMode
+                    ? "linear-gradient(135deg, #444, #222)"
+                    : "linear-gradient(135deg, #999, #777)"
+            };
+    }
+};
+
+    /* LOAD STORY */
     useEffect(() => {
+        setLoading(true);
+
         window.speechSynthesis.cancel();
         setIsSpeaking(false);
         setActiveIndex(null);
         setProgress(0);
         setCompleted(false);
-    }, [id]);
 
-    useEffect(() => {
+        const found = stories.find((s) => s.id === Number(id));
+        setStory(found || null);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 400);
+
         window.scrollTo(0, 0);
+
+        return () => window.speechSynthesis.cancel();
     }, [id]);
 
-    /* 📊 SCROLL PROGRESS */
+    /* PROGRESS */
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.scrollY;
@@ -56,12 +131,12 @@ const StoryPage = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    /* 🎆 CONFETTI */
+    /* CONFETTI */
     useEffect(() => {
         if (progress > 98 && !completed) {
             setCompleted(true);
 
-            const duration = 2000;
+            const duration = 500;
             const end = Date.now() + duration;
 
             const frame = () => {
@@ -82,11 +157,7 @@ const StoryPage = () => {
         }
     }, [progress, completed]);
 
-    if (!story) {
-        return <h2 style={{ textAlign: "center" }}>Story Not Found</h2>;
-    }
-
-    /* 🔊 AUDIO */
+    /* AUDIO */
     const handleSpeak = () => {
         if (isSpeaking) {
             window.speechSynthesis.cancel();
@@ -97,9 +168,7 @@ const StoryPage = () => {
         const utterances = story.content.map((text, index) => {
             const u = new SpeechSynthesisUtterance(text);
             u.rate = speed;
-
             u.onstart = () => setActiveIndex(index);
-
             return u;
         });
 
@@ -120,7 +189,7 @@ const StoryPage = () => {
         setIsSpeaking(true);
     };
 
-    /* 🔳 FULLSCREEN */
+    /* FULLSCREEN */
     const toggleFullScreen = () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
@@ -131,7 +200,59 @@ const StoryPage = () => {
         }
     };
 
-    /* 🎵 WAVEFORM */
+    /* LOADING SKELETON */
+    if (loading) {
+        return (
+            <div style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
+                <div style={{
+                    height: "30px",
+                    width: "60%",
+                    background: "#ddd",
+                    borderRadius: "8px",
+                    marginBottom: "20px",
+                    animation: "pulse 1.5s infinite"
+                }} />
+
+                <div style={{
+                    height: "300px",
+                    width: "100%",
+                    background: "#ddd",
+                    borderRadius: "12px",
+                    marginBottom: "20px",
+                    animation: "pulse 1.5s infinite"
+                }} />
+
+                {[1, 2, 3, 4].map((i) => (
+                    <div
+                        key={i}
+                        style={{
+                            height: "14px",
+                            width: `${80 - i * 10}%`,
+                            background: "#ddd",
+                            borderRadius: "6px",
+                            marginBottom: "10px",
+                            animation: "pulse 1.5s infinite"
+                        }}
+                    />
+                ))}
+
+                <style>
+                    {`
+                    @keyframes pulse {
+                        0% { opacity: 1; }
+                        50% { opacity: 0.4; }
+                        100% { opacity: 1; }
+                    }
+                    `}
+                </style>
+            </div>
+        );
+    }
+
+    if (!story) {
+        return <h2 style={{ textAlign: "center" }}>Story Not Found</h2>;
+    }
+
     const Waveform = ({ active }) => (
         <div style={{ display: "flex", gap: "2px", alignItems: "center" }}>
             {[...Array(28)].map((_, i) => (
@@ -167,10 +288,8 @@ const StoryPage = () => {
             color: darkMode ? "#e5e5e5" : "#2D3748",
             minHeight: "100vh"
         }}>
-            {/* Hide navbar in fullscreen */}
             {!fullScreen && <Navbar />}
 
-            {/* 📊 PROGRESS BAR */}
             <div style={{
                 position: "fixed",
                 top: 0,
@@ -193,10 +312,13 @@ const StoryPage = () => {
                     }}
                 />
 
-                {/* GENRE */}
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                     {story.genre.map((g, i) => (
-                        <Chip key={i} label={g} />
+                       <Chip
+        key={i}
+        label={g}
+        sx={getGenreStyle(g, darkMode)}
+    />
                     ))}
                 </div>
 
@@ -207,31 +329,28 @@ const StoryPage = () => {
                     marginTop: "1rem",
                     alignItems: "center"
                 }}>
-                    <div onClick={() => setDarkMode(!darkMode)} style={{ cursor: "pointer" }}>
+                    <div onClick={() => setDarkMode(!darkMode)}>
                         {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
                     </div>
 
                     <TextIncreaseIcon onClick={() => setFontSize(p => Math.min(p + 0.1, 1.8))} />
                     <TextDecreaseIcon onClick={() => setFontSize(p => Math.max(p - 0.1, 1))} />
 
-                    {/* FULLSCREEN TOGGLE */}
                     {fullScreen ? (
-                        <FullscreenExitIcon onClick={toggleFullScreen} style={{ cursor: "pointer" }} />
+                        <FullscreenExitIcon onClick={toggleFullScreen} />
                     ) : (
-                        <FullscreenIcon onClick={toggleFullScreen} style={{ cursor: "pointer" }} />
+                        <FullscreenIcon onClick={toggleFullScreen} />
                     )}
                 </div>
 
-                {/* AUDIO PLAYER */}
+                {/* AUDIO */}
                 <div style={{
                     marginTop: "1.5rem",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                    gap: "1rem"
+                    gap: "1rem",
+                    alignItems: "center"
                 }}>
-                    <div onClick={handleSpeak} style={{ cursor: "pointer" }}>
+                    <div onClick={handleSpeak}>
                         {isSpeaking ? <PauseIcon /> : <PlayArrowIcon />}
                     </div>
 
@@ -252,28 +371,24 @@ const StoryPage = () => {
                     fontFamily: "Georgia, serif"
                 }}>
                     {story.content.map((para, i) => (
-                        <p
-                            key={i}
-                            style={{
-                                padding: "10px",
-                                borderRadius: "8px",
-                                background: activeIndex === i
-                                    ? darkMode ? "#1e1e1e" : "#f1f1f1"
-                                    : "transparent"
-                            }}
-                        >
+                        <p key={i} style={{
+                            padding: "10px",
+                            borderRadius: "8px",
+                            background: activeIndex === i
+                                ? darkMode ? "#1e1e1e" : "#f1f1f1"
+                                : "transparent"
+                        }}>
                             {para}
                         </p>
                     ))}
                 </div>
             </div>
 
-            {/* WAVE ANIMATION */}
             <style>
                 {`
                 @keyframes wave {
-                    0%, 100% { transform: scaleY(0.6); }
-                    50% { transform: scaleY(1.4); }
+                    0%,100%{transform:scaleY(0.6)}
+                    50%{transform:scaleY(1.4)}
                 }
                 `}
             </style>
