@@ -11,6 +11,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import TextIncreaseIcon from "@mui/icons-material/TextIncrease";
 import TextDecreaseIcon from "@mui/icons-material/TextDecrease";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 import confetti from "canvas-confetti";
 
@@ -25,6 +26,7 @@ const StoryPage = () => {
     const [activeIndex, setActiveIndex] = useState(null);
     const [progress, setProgress] = useState(0);
     const [completed, setCompleted] = useState(false);
+    const [fullScreen, setFullScreen] = useState(false);
 
     const speechRef = useRef(null);
 
@@ -40,7 +42,7 @@ const StoryPage = () => {
         window.scrollTo(0, 0);
     }, [id]);
 
-    /* PROGRESS */
+    /* 📊 SCROLL PROGRESS */
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.scrollY;
@@ -54,7 +56,7 @@ const StoryPage = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    /* CONFETTI */
+    /* 🎆 CONFETTI */
     useEffect(() => {
         if (progress > 98 && !completed) {
             setCompleted(true);
@@ -62,15 +64,15 @@ const StoryPage = () => {
             const duration = 2000;
             const end = Date.now() + duration;
 
-            const colors = ["#ff0000", "#ffcc00", "#00ffcc", "#ff66ff", "#ffffff"];
-
             const frame = () => {
                 confetti({
                     particleCount: 6,
                     spread: 90,
                     startVelocity: 35,
-                    colors,
-                    origin: { x: Math.random(), y: Math.random() * 0.6 }
+                    origin: {
+                        x: Math.random(),
+                        y: Math.random() * 0.6
+                    }
                 });
 
                 if (Date.now() < end) requestAnimationFrame(frame);
@@ -84,7 +86,7 @@ const StoryPage = () => {
         return <h2 style={{ textAlign: "center" }}>Story Not Found</h2>;
     }
 
-    /* ✅ AUDIO (FIXED) */
+    /* 🔊 AUDIO */
     const handleSpeak = () => {
         if (isSpeaking) {
             window.speechSynthesis.cancel();
@@ -118,6 +120,18 @@ const StoryPage = () => {
         setIsSpeaking(true);
     };
 
+    /* 🔳 FULLSCREEN */
+    const toggleFullScreen = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+            setFullScreen(true);
+        } else {
+            document.exitFullscreen();
+            setFullScreen(false);
+        }
+    };
+
+    /* 🎵 WAVEFORM */
     const Waveform = ({ active }) => (
         <div style={{ display: "flex", gap: "2px", alignItems: "center" }}>
             {[...Array(28)].map((_, i) => (
@@ -153,9 +167,10 @@ const StoryPage = () => {
             color: darkMode ? "#e5e5e5" : "#2D3748",
             minHeight: "100vh"
         }}>
-            <Navbar />
+            {/* Hide navbar in fullscreen */}
+            {!fullScreen && <Navbar />}
 
-            {/* PROGRESS BAR */}
+            {/* 📊 PROGRESS BAR */}
             <div style={{
                 position: "fixed",
                 top: 0,
@@ -169,11 +184,14 @@ const StoryPage = () => {
             <div style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
                 <h1>{story.title}</h1>
 
-                <img src={story.image} style={{
-                    width: "100%",
-                    borderRadius: "12px",
-                    margin: "1rem 0"
-                }} />
+                <img
+                    src={story.image}
+                    style={{
+                        width: "100%",
+                        borderRadius: "12px",
+                        margin: "1rem 0"
+                    }}
+                />
 
                 {/* GENRE */}
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
@@ -183,17 +201,28 @@ const StoryPage = () => {
                 </div>
 
                 {/* CONTROLS */}
-                <div style={{ display: "flex", gap: "1rem", marginTop: "1rem", alignItems: "center" }}>
-                    <div onClick={() => setDarkMode(!darkMode)}>
+                <div style={{
+                    display: "flex",
+                    gap: "1rem",
+                    marginTop: "1rem",
+                    alignItems: "center"
+                }}>
+                    <div onClick={() => setDarkMode(!darkMode)} style={{ cursor: "pointer" }}>
                         {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
                     </div>
 
                     <TextIncreaseIcon onClick={() => setFontSize(p => Math.min(p + 0.1, 1.8))} />
                     <TextDecreaseIcon onClick={() => setFontSize(p => Math.max(p - 0.1, 1))} />
-                    <FullscreenIcon />
+
+                    {/* FULLSCREEN TOGGLE */}
+                    {fullScreen ? (
+                        <FullscreenExitIcon onClick={toggleFullScreen} style={{ cursor: "pointer" }} />
+                    ) : (
+                        <FullscreenIcon onClick={toggleFullScreen} style={{ cursor: "pointer" }} />
+                    )}
                 </div>
 
-                {/* AUDIO + WAVE + SPEED (RESTORED PROPERLY) */}
+                {/* AUDIO PLAYER */}
                 <div style={{
                     marginTop: "1.5rem",
                     display: "flex",
@@ -202,15 +231,12 @@ const StoryPage = () => {
                     flexWrap: "wrap",
                     gap: "1rem"
                 }}>
-                    {/* PLAY BUTTON */}
-                    <div onClick={handleSpeak} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div onClick={handleSpeak} style={{ cursor: "pointer" }}>
                         {isSpeaking ? <PauseIcon /> : <PlayArrowIcon />}
                     </div>
 
-                    {/* WAVE */}
                     <Waveform active={isSpeaking} />
 
-                    {/* SPEED */}
                     <div style={{ display: "flex", gap: "6px" }}>
                         <span style={speedBtnStyle(0.75)} onClick={() => setSpeed(0.75)}>0.75x</span>
                         <span style={speedBtnStyle(1)} onClick={() => setSpeed(1)}>1x</span>
@@ -242,6 +268,7 @@ const StoryPage = () => {
                 </div>
             </div>
 
+            {/* WAVE ANIMATION */}
             <style>
                 {`
                 @keyframes wave {
