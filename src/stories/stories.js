@@ -339,6 +339,209 @@ Then both said at the same time: “I am sorry.”`,
 
     `And in that moment, the man felt a warmth inside him that no words could ever carry.`
   ]
+},
+{
+  id: 6,
+  title: "After Many Winters",
+  description:
+    "Mr. Khanna meets his childhood friend after decades during a quiet winter morning, revisiting warmth, silence, and memories left untouched by time.",
+  genre: ["Nostalgia", "Emotional", "Friendship"],
+  content: [
+    `After two days of heavy snowfall, the weather finally gave some relief. The park was still covered with snow, but children were running around happily in their snow boots, leaving footprints everywhere.`,
+
+    `Mr. Khanna was glad to start his morning walk again after the break. He walked slowly, wearing a thick black woolen sweater, gloves, and a woolen cap. His glasses kept slipping down his nose, and he had to adjust them every few minutes.`,
+
+    `As he walked with short, dragging steps, his cheeks looked bright red from the cold. Sometimes, he covered his nose and mouth with his hands and breathed out to feel a little warmth.`,
+
+    `All around the park were tall deciduous trees that had lost most of their leaves. A few dry leaves still hung on, moving slightly in the wind.`,
+
+    `At a distance, he saw a lady wearing a maroon shawl. Her hair came down to her shoulders. Because of the fog, he couldn’t see much more than that. Every few minutes, a wave of cold air passed by, brushing against his ears and nose. It made a soft hush sound and felt almost like it could freeze them.`,
+
+    `With every step he took towards the lady, things became clearer. She was Mrs. Padmini, his old school friend. Mr. Khanna didn’t waste a moment; he gently tapped her on the shoulder.`,
+
+    `She turned around, and they looked at each other. Mr. Khanna smiled warmly, but Mrs. Padmini seemed confused, trying to remember who he was.`,
+
+    `It took a few seconds, but then she recognized him and a smile slowly spread across her face.`,
+
+    `Just then, a school going boy and girl, around ten years old, walked past them, hand in hand, smiling at each other. The sight brought a quiet joy to the chilly morning.`,
+
+    `Mr. Khanna sat down beside her. The only space between them was filled with the cold air that moved quietly in the gap. Just behind the bench stood a tall deciduous tree. Its bare branches shook from time to time as the cold wind blew stronger.`,
+
+    `The wind, no longer harsh, now moved gently between them, carrying the warmth that words left unsaid.`,
+
+    `The tree behind them dropped a single dry leaf that twirled down between them, as if marking the quiet space of years gone by, yet not lost. A pair of sparrows landed on a nearby branch, chirping lightly before flying off together into the golden light.`,
+
+    `A faint bell echoed through the park. A chaiwala on a bicycle appeared, steam rising from his kettle.`,
+
+    `Mrs. Padmini’s eyes followed him, lighting up with quiet delight. Mr. Khanna noticed. Without a word, he stood up, his steps slow and dragging through the snow.`,
+
+    `He raised his hand, stopping the chaiwala. Two cups of steaming tea were poured.`,
+
+    `Returning, he held out a cup to her. She accepted it gently, their fingers brushing for a second.`,
+
+    `Nearby, the boy and girl were at a small toffee cart, picking colorful sweets with glowing faces.`,
+
+    `The bench stayed silent, but the warmth of the tea, the drifting fog, and the soft clink of toffees told the story instead.`,
+
+    `As they finished their tea, the little girl who had been buying toffees came running towards Mrs. Padmini.`,
+
+    `Mrs. Padmini stood up slowly, giving a faint, gentle smile. Mr. Khanna watched her, a soft smile resting on his face.`,
+
+    `Just then, the sun slipped behind the clouds again. The wind picked up, colder now, brushing through the park with a steady hum.`,
+
+    `Behind the bench, the tall deciduous tree shook and this time, all its remaining leaves let go, drifting down like quiet farewells.`,
+
+    `Mrs. Padmini walked away with the girl, her shawl fluttering in the breeze.`,
+
+    `Mr. Khanna turned back slowly, adjusting his spectacles once more, his steps dragging through the snow, quiet, steady, and alone again.`
+  ]
+},
+{
+  id: 7,
+  title: "Little Things, Big Heart",
+  description:
+    "A story about love hidden in ordinary sacrifices, where a family struggling through difficult times rediscovers warmth through the smallest gestures.",
+  genre: ["Emotional", "Family", "Relationship"],
+  content: [
+    `It had been months since the family had gone out together. Life had become a quiet mix of routines and responsibilities. Neha sat on the edge of her bed one evening with her old diary in hand, flipping through pages filled with everyday notes, school reminders, and a few faded grocery receipts. The house was calm. Aarav and Misha had fallen asleep in the next room, and the only sound was the ceiling fan above.`,
+
+    `Rajat lay beside her, his breathing soft and steady. The stress of running his struggling startup showed on his face, even in sleep. Payments were stuck, clients were few, and the weight of holding everything together rested silently on his shoulders. Neha had seen it all, his long hours, his quiet sighs, and the way he stared at the ceiling late into the night, pretending to be fine.`,
+
+    `She flipped to a clean page in her diary and began to write, slowly thinking of what they truly needed. Aarav had grown out of his school shoes. Misha had been borrowing colours from her classmates and could use a new set of sketch pens. Rajat’s wallet had become worn and torn at the corners, barely holding together.`,
+
+    `Her eyes paused as she thought of something for herself, a cream colored watch she had often admired on her way to the market. It wasn’t fancy, just elegant and soft on the eyes. She smiled for a second, picturing it on her wrist, then looked at the page again. Slowly, without a word, she crossed it out.`,
+
+    `She sat still for a moment, looking at the scratched out words. Then she closed the diary, turned off the light, and lay down beside Rajat, hoping the weekend would bring a little joy.`,
+
+    `That Friday evening, Rajat came home looking slightly brighter. A client had finally agreed to place an order, and a small payment had come through. It wasn’t a lot, but it was enough to clear the electricity bill and leave something for small needs.`,
+
+    `“We should go out this Sunday,” he said gently. “Buy a few things. Maybe eat out. The kids will be happy.”`,
+
+    `Neha nodded, trying not to show the small burst of excitement that filled her. They hadn’t done this in so long.`,
+
+    `The sun was sharp that morning, casting golden streaks across their small living room. Aarav and Misha rushed to get dressed while Neha tied her yellow saree neatly and packed their cloth shopping bag.`,
+
+    `The market was alive with color and noise. Children ran across narrow lanes. Street vendors shouted prices. The smell of hot samosas, ripe mangoes, and incense from a nearby temple mixed in the air.`,
+
+    `They moved through the crowd, stopping at stalls. Neha bent down to check the size of Aarav’s shoes carefully before buying a sturdy black pair. Misha picked out a set of sketch pens with glitters that made her eyes light up.`,
+
+    `They passed a book stall, and Rajat picked up a secondhand business book with a hopeful smile. Neha followed him, watching him closely. At one corner, she stopped when she saw a small display and there it was again. The cream colored watch. Its soft strap and silver dial looked just like she remembered.`,
+
+    `The shopkeeper smiled. “Discount today, madam. Good quality.”`,
+
+    `She touched the glass gently, then looked away. “Not today,” she said politely. “Maybe next time.”`,
+
+    `Further ahead, she noticed a simple brown wallet. “Yours is falling apart,” she told Rajat, holding it out. “Let’s take this.”`,
+
+    `He looked unsure for a moment but then nodded. “If you say so.”`,
+
+    `By evening, they found a small restaurant with four wooden tables and a smiling waiter. The walls had pictures of Indian dishes, and soft music played in the background. The children, full of energy, looked thrilled just to sit and order their own food.`,
+
+    `They ordered dal, paneer, hot rotis, and even a small dessert. As they waited, Neha began to go through the shopping bag out of habit. She checked the shoes, the pens, the book, but then frowned.`,
+
+    `“The wallet is not here,” she said, confused. “I saw the man packing it.”`,
+
+    `Rajat stayed quiet for a moment, then reached into his own bag. Without a word, he placed a small, flat box in front of her.`,
+
+    `“What’s this?” she asked.`,
+
+    `“Open it,” he said, eyes calm.`,
+
+    `She slowly unwrapped the paper, and her breath caught. There, sitting neatly inside, was the cream colored watch.`,
+
+    `She looked up at him, surprised. “You bought this?”`,
+
+    `“I returned the wallet,” Rajat said, his voice gentle. “I saw the way you looked at this. You always think of all of us, but you never let yourself have anything. I wanted you to have this.”`,
+
+    `Her eyes shimmered. “You shouldn’t have…”`,
+
+    `“I should,” he said. “I wanted to.”`,
+
+    `She couldn’t speak for a few moments. She just held his hand, the smile on her face saying everything her words couldn’t.`
+  ]
+},
+
+{
+  id: 8,
+  title: "His Only Gift",
+  description:
+    "A story about a man carrying the weight of a silent sacrifice who unexpectedly reunites with the daughter he once gave away for her happiness.",
+  genre: ["Emotional", "Family", "Nostalgia"],
+  content: [
+    `The city had been under a thick layer of snow for a few days. From a distance, it looked akin to a fairytale town, white rooftops, silent streets, and a sky heavy with clouds though people had been struggling for proper supply of bread and butter. From time to time the snowfall kept accelerating as if it wanted to break the back of the people who stood like warriors under it on the streets.`,
+
+    `Mr. Kingston, garbed in a neatly ironed black suit and a hat dusted with snow, was one of the brave warriors who was battling with this storm. Though he could not stand tall against it much and he gazed upon house no. 257, its windows shimmering with a warm golden glow.`,
+
+    `He trudged through the snow and finally reached the doorstep of house no. 257 whose nameplate proudly displayed Mr. and Mrs. Jameson. Though to decipher it he took out his old age glasses out of the inner pocket of his blazer. He had to make an effort to reach out to the doorbell.`,
+
+    `A lady, garbed in a light violet woollen sweater paired with a white frock appeared.`,
+
+    `“Who are you?” she gazed at him in surprise.`,
+
+    `“Actually, Mrs… what is your good name?” he asked.`,
+
+    `“Maria... Maria Jameson,” she replied.`,
+
+    `“My greetings, Mrs. Jameson. The snowfall has been quite torrential of late, might I find shelter here?” he requested.`,
+
+    `In the midst of this exchange, a man garbed in a white woollen sweater and ocean coloured trousers appeared, a glass of red wine in his hand.`,
+
+    `“Who are you talking to?” he asked Maria.`,
+
+    `Mrs. Jameson pointed toward Mr. Kingston. “He is requesting to let him get in for sometime.”`,
+
+    `“What is your good name?” Mr. Jameson gazed suspiciously.`,
+
+    `“Hey, I am Mr. Kingston. I wanted a roof over my head for sometime until this snowfall eases!” he said.`,
+
+    `“I see, come in… otherwise you will catch a cold,” Mr. Jameson said, stepping aside to show the way.`,
+
+    `The corridor walls were lined with photo frames from Mr. and Mrs. Jameson’s wedding. Mr. Kingston’s eyes lingered on one in particular.`,
+
+    `“And who might this sweet little girl be?” he asked, gesturing toward the frame.`,
+
+    `“Our daughter, Mary when she was ten years old,” replied Mrs. Jameson with a glittering smile on her face.`,
+
+    `Mr. Jameson added, “Mary came to us through someone who… well, wished to remain unnamed and we never met that person. We never asked much, just knew she was meant to be ours.”`,
+
+    `The corridor opened into a spacious living room. At its center stood a cream colored sofa, and near it, a fireplace above which a candle stand held three flickering candles.`,
+
+    `Beside the fireplace was the piano. There was Mary, her fingers dancing over the piano keys and the room echoed with the soft melody.`,
+
+    `All three of them settled down on the sofa.`,
+
+    `“This is Mary, the girl whom you saw a couple of minutes ago,” Mr. Jameson said.`,
+
+    `Before Mr. Kingston could reply, Mary smiled and said, “Yes, I’m grown up now.”`,
+
+    `Mr. and Mrs. Jameson laughed and patted her head lovingly. The warmth in their eyes showed how much they cared for her.`,
+
+    `A servant came in carrying a tray of tea. The cups were warm in their hands, and the steam rose into the air.`,
+
+    `While drinking tea, Mr. Jameson asked, “Who is there in your family, Mr. Kingston?”`,
+
+    `Mr. Kingston’s smile faded. He placed the cup back on the table. “My wife died during a serious operation… and now there is no one else,” he said in a low voice.`,
+
+    `Mary looked at him with curious eyes. She stood up and went to a small wooden shelf. She took out a framed photograph and came back.`,
+
+    `“This was me when I was a baby,” she said proudly, handing it to him.`,
+
+    `Mr. Kingston’s hand shook as he held the picture. His heartbeat grew faster. He stared at the image for a moment, then gave a small smile and returned it to her.`,
+
+    `Suddenly, he stood up. “I’m sorry… I have to leave now. Something important has come up,” he said quickly.`,
+
+    `“Oh… alright,” Mrs. Jameson said. “It was nice to meet you.”`,
+
+    `The Jamesons walked him to the door. Mary waved and said, “Come back again when the snow brings you here.”`,
+
+    `He gave a faint smile and stepped outside. The air was cold, and snowflakes landed on his hat. He walked slowly down the steps and stood still for a moment.`,
+
+    `From his wallet, he pulled out an old, worn photograph. It was the same baby, Mary, wrapped in a blanket, her tiny face sleeping peacefully. The edges of the photo were creased from being held too many times.`,
+
+    `He held the picture tightly, his eyes moist. In his heart, he went back to the day he had made the hardest choice of his life, leaving his newborn daughter with people who could give her a better life than he could. He had no money, no job, and his wife was gone. The only thing he could give her then was a chance to live happily.`,
+
+    `He put the photograph back in his wallet, took a deep breath, and walked away into the snowy night, leaving behind the truth.`
+  ]
 }
 ];
 

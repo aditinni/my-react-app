@@ -1,11 +1,8 @@
 import '../App.css';
 
-import {
-  NavLink,
-  useNavigate,
-} from 'react-router-dom';
-
+import { NavLink, useNavigate } from 'react-router-dom';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -17,42 +14,39 @@ const Navbar = () => {
 
   return (
     <nav aria-label="main navigation">
-      <div className='nav-flex'>
-        <h1 className='logo'>THE STORY NOOK</h1>
+      <div className="nav-flex">
 
-        <div className='nav-links'>
+        {/* Logo */}
+        <div className="logo-group">
+          <div className="logo-icon">
+            <AutoStoriesIcon sx={{ fontSize: 16, color: 'white' }} />
+          </div>
+          <span className="logo">THE STORY NOOK</span>
+        </div>
+
+        {/* Links */}
+        <div className="nav-links">
           <NavLink
-            to='/home'
-            className={({ isActive }) =>
-              isActive ? 'link active' : 'link'
-            }
+            to="/home"
+            className={({ isActive }) => isActive ? 'link active' : 'link'}
           >
             Home
           </NavLink>
 
           <NavLink
-            to='/about'
-            className={({ isActive }) =>
-              isActive ? 'link active' : 'link'
-            }
+            to="/about"
+            className={({ isActive }) => isActive ? 'link active' : 'link'}
           >
             About the Author
           </NavLink>
 
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className='logout-btn'
-          >
-            <LogoutRoundedIcon
-              sx={{
-                fontSize: 18,
-              }}
-            />
-
+          {/* Logout */}
+          <button onClick={handleLogout} className="logout-btn">
+            <LogoutRoundedIcon sx={{ fontSize: 15 }} />
             Logout
           </button>
         </div>
+
       </div>
     </nav>
   );

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import {
   Box,
-  Paper,
   TextField,
   Button,
   Typography,
@@ -12,7 +11,6 @@ import {
   Stack,
   LinearProgress,
   CircularProgress,
-  Divider,
   Fade,
 } from '@mui/material';
 
@@ -25,10 +23,9 @@ import {
   VisibilityOff,
   CheckCircle,
   RadioButtonUnchecked,
-  WavingHand,
 } from '@mui/icons-material';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../utils/authService';
 
@@ -36,268 +33,278 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-
-  const [status, setStatus] = useState({
-    error: '',
-    success: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [status, setStatus] = useState({ error: '', success: '' });
 
   const navigate = useNavigate();
 
-  // Password validation
   const rules = [
     { label: '8+ chars', valid: formData.password.length >= 8 },
-    { label: '1 number', valid: /\d/.test(formData.password) },
+    { label: '1 number',  valid: /\d/.test(formData.password) },
     { label: '1 special', valid: /[ @$!%*?&]/.test(formData.password) },
   ];
-
-  const strength =
-    (rules.filter((r) => r.valid).length / rules.length) * 100;
+  const strength = (rules.filter((r) => r.valid).length / rules.length) * 100;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!isLogin && strength < 100) {
-      setStatus({
-        error: 'Please fulfill all password requirements.',
-        success: '',
-      });
+      setStatus({ error: 'Please fulfill all password requirements.', success: '' });
       return;
     }
-
     setLoading(true);
-    setStatus({
-      error: '',
-      success: '',
-    });
-
+    setStatus({ error: '', success: '' });
     try {
       if (isLogin) {
-        await authService.login(
-          formData.email,
-          formData.password
-        );
-
+        await authService.login(formData.email, formData.password);
         navigate('/home');
       } else {
-        await authService.register(
-          formData.name,
-          formData.email,
-          formData.password
-        );
-
-        setStatus({
-          success:
-            'Account created successfully! Please login',
-          error: '',
-        });
-
+        await authService.register(formData.name, formData.email, formData.password);
+        setStatus({ success: 'Account created successfully! Please login', error: '' });
         setIsLogin(true);
-
-        setFormData({
-          ...formData,
-          password: '',
-        });
+        setFormData({ ...formData, password: '' });
       }
     } catch (err) {
-      setStatus({
-        error: err.message,
-        success: '',
-      });
+      setStatus({ error: err.message, success: '' });
     } finally {
       setLoading(false);
     }
   };
 
+  const switchMode = () => {
+    setIsLogin(!isLogin);
+    setStatus({ error: '', success: '' });
+    setFormData({ name: '', email: '', password: '' });
+  };
+
+  // Quote changes between login / signup
+  const quote = isLogin
+    ? { pre: '"Every story', em: 'begins', post: 'with\na single word."' }
+    : { pre: '"Every great', em: 'journey', post: 'starts with\none step."' };
+
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
+    <Box sx={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: { xs: 'column', md: 'row' },
+      background: '#0C0C0F',
+      overflow: 'hidden',
+    }}>
+
+      {/* ═══════════════════════════════
+          LEFT PANEL — visible everywhere
+      ═══════════════════════════════ */}
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: { xs: 'center', md: 'space-between' },
+        alignItems: { xs: 'center', md: 'flex-start' },
+        width: { xs: '100%', md: '44%' },
+        minHeight: { xs: 'auto', md: '100vh' },
+        py: { xs: 3.5, md: 6 },
+        px: { xs: 3, md: 6 },
         position: 'relative',
         overflow: 'hidden',
+        background: 'linear-gradient(160deg, #13111A 0%, #1C1629 60%, #0F1521 100%)',
+        borderBottom: { xs: '1px solid rgba(255,255,255,0.05)', md: 'none' },
+        borderRight: { xs: 'none', md: '1px solid rgba(255,255,255,0.04)' },
+        textAlign: { xs: 'center', md: 'left' },
+        gap: { xs: 2.5, md: 0 },
+      }}>
 
+        {/* Ambient orb */}
+        <Box sx={{
+          position: 'absolute',
+          width: { xs: 220, md: 420 },
+          height: { xs: 220, md: 420 },
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(180,140,255,0.18) 0%, transparent 70%)',
+          top: { xs: '-50px', md: '30%' },
+          left: { xs: '-50px', md: '50%' },
+          transform: { xs: 'none', md: 'translate(-50%, -50%)' },
+          pointerEvents: 'none',
+          filter: 'blur(12px)',
+        }} />
+
+        {/* Texture lines */}
+        <Box sx={{
+          position: 'absolute', inset: 0, opacity: 0.025,
+          backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,1) 40px, rgba(255,255,255,1) 41px)`,
+          pointerEvents: 'none',
+        }} />
+
+        {/* ── Logo ── */}
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1.5,
+          zIndex: 1,
+          justifyContent: { xs: 'center', md: 'flex-start' },
+        }}>
+          <Box sx={{
+            width: 34, height: 34, borderRadius: '10px',
+            background: 'linear-gradient(135deg, #C4A8FF, #8B6FE8)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 14px rgba(130,90,255,0.35)',
+            flexShrink: 0,
+          }}>
+            <AutoStories sx={{ color: 'white', fontSize: 17 }} />
+          </Box>
+          <Typography sx={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: '0.68rem',
+            fontWeight: 500,
+            color: 'rgba(255,255,255,0.85)',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+          }}>
+            The Story Nook
+          </Typography>
+        </Box>
+
+        {/* ── Animated quote ── */}
+        <Box sx={{ zIndex: 1, width: '100%' }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isLogin ? 'q-login' : 'q-signup'}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Typography sx={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: { xs: 'clamp(1.1rem, 4.5vw, 1.5rem)', md: 'clamp(1.8rem, 3vw, 2.8rem)' },
+                fontWeight: 300,
+                lineHeight: 1.3,
+                color: 'rgba(255,255,255,0.92)',
+                letterSpacing: '-0.01em',
+                mb: { xs: 0, md: 2.5 },
+                whiteSpace: 'pre-line',
+              }}>
+                {quote.pre}{'\n'}
+                <Box component="span" sx={{ fontStyle: 'italic', color: '#C4A8FF' }}>
+                  {quote.em}
+                </Box>
+                {' '}{quote.post}
+              </Typography>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Hairline rule — desktop only */}
+          <Box sx={{
+            display: { xs: 'none', md: 'block' },
+            width: 40, height: 1,
+            background: 'rgba(196,168,255,0.4)',
+            mt: 0,
+          }} />
+        </Box>
+
+        {/* Bottom label — desktop only */}
+        <Box sx={{ display: { xs: 'none', md: 'block' }, zIndex: 1 }}>
+          <Typography sx={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: '0.58rem',
+            color: 'rgba(255,255,255,0.15)',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+          }}>
+            est. {new Date().getFullYear()}
+          </Typography>
+        </Box>
+      </Box>
+
+      {/* ═══════════════════════════════
+          RIGHT PANEL — form
+      ═══════════════════════════════ */}
+      <Box sx={{
+        flex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        px: { xs: 2.5, sm: 5 },
+        py: { xs: 4, md: 6 },
+        background: '#0C0C0F',
+        minHeight: { xs: 'auto', md: '100vh' },
+      }}>
+        <Box sx={{ width: '100%', maxWidth: 400 }}>
 
-        px: 2,
-
-        background:
-          'linear-gradient(135deg, #fff7f0 0%, #f7ecff 45%, #eef4ff 100%)',
-      }}
-    >
-      {/* Background blobs */}
-      <Box
-        sx={{
-          position: 'absolute',
-          width: 350,
-          height: 350,
-          borderRadius: '50%',
-          background: '#FFD6E8',
-          filter: 'blur(90px)',
-          top: -100,
-          left: -100,
-          opacity: 0.7,
-        }}
-      />
-
-      <Box
-        sx={{
-          position: 'absolute',
-          width: 300,
-          height: 300,
-          borderRadius: '50%',
-          background: '#D7E8FF',
-          filter: 'blur(90px)',
-          bottom: -80,
-          right: -80,
-          opacity: 0.8,
-        }}
-      />
-
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 25,
-          scale: 0.96,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          scale: 1,
-        }}
-        transition={{
-          duration: 0.5,
-        }}
-        style={{
-          width: '100%',
-          maxWidth: 460,
-        }}
-      >
-        <Paper
-          elevation={0}
-          sx={{
-            position: 'relative',
-            overflow: 'hidden',
-
-            p: { xs: 4, md: 5 },
-
-            borderRadius: '32px',
-
-            backdropFilter: 'blur(20px)',
-
-            background: 'rgba(255,255,255,0.7)',
-
-            border:
-              '1px solid rgba(255,255,255,0.6)',
-
-            boxShadow:
-              '0 10px 40px rgba(130,120,255,0.12)',
-          }}
-        >
-          {/* Top gradient line */}
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 6,
-
-              background:
-                'linear-gradient(90deg, #FF8DC7, #B388FF, #7BAEFF)',
-            }}
-          />
-
-          {/* Header */}
-          <Box
-            sx={{
-              textAlign: 'center',
-              mb: 4,
-            }}
-          >
+          {/* Eyebrow — slides on switch */}
+          <AnimatePresence mode="wait">
             <motion.div
-              animate={{
-                y: [0, -5, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 3,
-              }}
+              key={isLogin ? 'ey-in' : 'ey-up'}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.22 }}
             >
-              <Box
-                sx={{
-                  width: 80,
-                  height: 80,
-
-                  mx: 'auto',
-                  mb: 2,
-
-                  borderRadius: '24px',
-
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-
-                  background:
-                    'linear-gradient(135deg, #FFB6D9, #C7B6FF)',
-
-                  boxShadow:
-                    '0 10px 30px rgba(199,182,255,0.35)',
-                }}
-              >
-                <AutoStories
-                  sx={{
-                    color: 'white',
-                    fontSize: 40,
-                  }}
-                />
-              </Box>
+              <Typography sx={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: '0.62rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: '#C4A8FF',
+                mb: 1.5,
+              }}>
+                {isLogin ? '— Welcome back' : '— New member'}
+              </Typography>
             </motion.div>
+          </AnimatePresence>
 
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: 800,
-                color: '#2B2B2B',
+          {/* Heading — fades up on switch */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isLogin ? 'h-in' : 'h-up'}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Typography sx={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: 'clamp(1.9rem, 4vw, 2.8rem)',
+                fontWeight: 500,
+                color: 'rgba(255,255,255,0.95)',
+                lineHeight: 1.1,
                 mb: 1,
-              }}
-            >
-              {isLogin
-                ? 'Welcome Back 👋'
-                : 'Create Account ✨'}
-            </Typography>
+                letterSpacing: '-0.01em',
+                whiteSpace: 'pre-line',
+              }}>
+                {isLogin ? 'Sign in to my\nworld of stories' : 'Create your\naccount'}
+              </Typography>
+            </motion.div>
+          </AnimatePresence>
 
-            <Typography
-              variant="body2"
-              sx={{
-                color: '#7A7A7A',
-                fontSize: '0.95rem',
-              }}
+          {/* Sub-heading — fades on switch */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isLogin ? 'sub-in' : 'sub-up'}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, delay: 0.05 }}
             >
-              {isLogin
-                ? 'Continue your beautiful journey'
-                : 'Join and start your magical story'}
-            </Typography>
-          </Box>
+              <Typography sx={{
+                fontSize: '0.85rem',
+                color: 'rgba(255,255,255,0.28)',
+                mb: 3.5,
+                fontFamily: 'system-ui, sans-serif',
+              }}>
+                {isLogin ? 'Stories are waiting.' : 'Join a world of beautiful stories.'}
+              </Typography>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Alerts */}
           <Fade in={!!status.error}>
             <Box>
               {status.error && (
-                <Alert
-                  severity="error"
-                  sx={{
-                    mb: 2,
-                    borderRadius: '16px',
-                  }}
-                >
+                <Alert severity="error" sx={{
+                  mb: 2.5, borderRadius: '12px',
+                  background: 'rgba(255,80,80,0.1)',
+                  border: '1px solid rgba(255,80,80,0.2)',
+                  color: '#FF9090',
+                  '& .MuiAlert-icon': { color: '#FF9090' },
+                }}>
                   {status.error}
                 </Alert>
               )}
@@ -307,376 +314,229 @@ export default function AuthPage() {
           <Fade in={!!status.success}>
             <Box>
               {status.success && (
-                <Alert
-                  severity="success"
-                  sx={{
-                    mb: 2,
-                    borderRadius: '16px',
-                  }}
-                >
+                <Alert severity="success" sx={{
+                  mb: 2.5, borderRadius: '12px',
+                  background: 'rgba(80,220,140,0.1)',
+                  border: '1px solid rgba(80,220,140,0.2)',
+                  color: '#80FFBA',
+                  '& .MuiAlert-icon': { color: '#80FFBA' },
+                }}>
                   {status.success}
                 </Alert>
               )}
             </Box>
           </Fade>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit}>
-            <fieldset
-              disabled={loading}
-              style={{
-                border: 'none',
-                padding: 0,
-                margin: 0,
-              }}
+          {/* Form — slides in on switch */}
+          <AnimatePresence mode="wait">
+            <motion.form
+              key={isLogin ? 'form-login' : 'form-signup'}
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             >
-              {!isLogin && (
+              <fieldset disabled={loading} style={{ border: 'none', padding: 0, margin: 0 }}>
+
+                {!isLogin && (
+                  <TextField
+                    fullWidth required margin="normal"
+                    label="Full Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Person sx={{ color: 'rgba(255,255,255,0.2)', fontSize: 18 }} />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={textFieldStyles}
+                  />
+                )}
+
                 <TextField
-                  fullWidth
-                  required
-                  margin="normal"
-                  label="Full Name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      name: e.target.value,
-                    })
-                  }
+                  fullWidth required margin="normal"
+                  label="Email Address"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <Person
-                          sx={{
-                            color: '#B388FF',
-                          }}
-                        />
+                        <Email sx={{ color: 'rgba(255,255,255,0.2)', fontSize: 18 }} />
                       </InputAdornment>
                     ),
                   }}
                   sx={textFieldStyles}
                 />
-              )}
 
-              <TextField
-                fullWidth
-                required
-                margin="normal"
-                label="Email Address"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    email: e.target.value,
-                  })
-                }
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Email
-                        sx={{
-                          color: '#7BAEFF',
-                        }}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={textFieldStyles}
-              />
-
-              <TextField
-                fullWidth
-                required
-                margin="normal"
-                label="Password"
-                type={
-                  showPassword ? 'text' : 'password'
-                }
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    password: e.target.value,
-                  })
-                }
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Lock
-                        sx={{
-                          color: '#FF8DC7',
-                        }}
-                      />
-                    </InputAdornment>
-                  ),
-
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() =>
-                          setShowPassword(
-                            !showPassword
-                          )
-                        }
-                      >
-                        {showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                sx={textFieldStyles}
-              />
-
-              {/* Password Strength */}
-              {!isLogin && (
-                <Box
-                  sx={{
-                    mt: 2,
-                    mb: 3,
-
-                    p: 2,
-
-                    borderRadius: '20px',
-
-                    background:
-                      'rgba(255,255,255,0.65)',
-
-                    border:
-                      '1px solid #EFEFEF',
-                  }}
-                >
-                  <LinearProgress
-                    variant="determinate"
-                    value={strength}
-                    sx={{
-                      height: 8,
-                      borderRadius: 10,
-                      mb: 2,
-                      bgcolor: '#ECECEC',
-
-                      '& .MuiLinearProgress-bar': {
-                        borderRadius: 10,
-
-                        background:
-                          strength === 100
-                            ? 'linear-gradient(90deg, #43E97B, #38F9D7)'
-                            : 'linear-gradient(90deg, #FF8DC7, #B388FF)',
-                      },
-                    }}
-                  />
-
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    flexWrap="wrap"
-                  >
-                    {rules.map((rule, i) => (
-                      <Box
-                        key={i}
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 0.5,
-
-                          px: 1,
-                          py: 0.5,
-
-                          borderRadius: '999px',
-
-                          background: rule.valid
-                            ? '#ECFFF3'
-                            : '#F7F7F7',
-                        }}
-                      >
-                        {rule.valid ? (
-                          <CheckCircle
-                            sx={{
-                              fontSize: 14,
-                              color: '#43A047',
-                            }}
-                          />
-                        ) : (
-                          <RadioButtonUnchecked
-                            sx={{
-                              fontSize: 14,
-                              color: '#BDBDBD',
-                            }}
-                          />
-                        )}
-
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            color: rule.valid
-                              ? '#43A047'
-                              : '#777',
-                            fontWeight: 600,
-                          }}
+                <TextField
+                  fullWidth required margin="normal"
+                  label="Password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Lock sx={{ color: 'rgba(255,255,255,0.2)', fontSize: 18 }} />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          sx={{ color: 'rgba(255,255,255,0.2)', '&:hover': { color: 'rgba(255,255,255,0.5)' } }}
                         >
-                          {rule.label}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Stack>
-                </Box>
-              )}
+                          {showPassword
+                            ? <VisibilityOff sx={{ fontSize: 18 }} />
+                            : <Visibility sx={{ fontSize: 18 }} />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={textFieldStyles}
+                />
 
-              {/* Submit Button */}
-              <Button
-                fullWidth
-                type="submit"
-                size="large"
-                variant="contained"
-                disabled={loading}
-                sx={{
-                  mt: 1,
-                  py: 1.7,
-
-                  borderRadius: '18px',
-
-                  textTransform: 'none',
-
-                  fontSize: '1rem',
-                  fontWeight: 700,
-
-                  background:
-                    'linear-gradient(135deg, #FF8DC7, #B388FF)',
-
-                  boxShadow:
-                    '0 10px 25px rgba(179,136,255,0.35)',
-
-                  '&:hover': {
-                    transform:
-                      'translateY(-2px)',
-
-                    boxShadow:
-                      '0 14px 30px rgba(179,136,255,0.45)',
-
-                    background:
-                      'linear-gradient(135deg, #FF74BB, #9D72FF)',
-                  },
-
-                  transition: '0.3s',
-                }}
-              >
-                {loading ? (
-                  <CircularProgress
-                    size={24}
-                    sx={{
-                      color: 'white',
-                    }}
-                  />
-                ) : (
-                  <>
-                    <WavingHand
+                {!isLogin && (
+                  <Box sx={{ mt: 2, mb: 3 }}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={strength}
                       sx={{
-                        mr: 1,
-                        fontSize: 20,
+                        height: 2, borderRadius: 10, mb: 2,
+                        bgcolor: 'rgba(255,255,255,0.06)',
+                        '& .MuiLinearProgress-bar': {
+                          borderRadius: 10,
+                          background: strength === 100
+                            ? 'linear-gradient(90deg, #43E97B, #38F9D7)'
+                            : 'linear-gradient(90deg, #C4A8FF, #8B6FE8)',
+                        },
                       }}
                     />
-
-                    {isLogin
-                      ? 'Enter Library'
-                      : 'Create Account'}
-                  </>
+                    <Stack direction="row" spacing={1.5}>
+                      {rules.map((rule, i) => (
+                        <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                          {rule.valid
+                            ? <CheckCircle sx={{ fontSize: 12, color: '#43E97B' }} />
+                            : <RadioButtonUnchecked sx={{ fontSize: 12, color: 'rgba(255,255,255,0.18)' }} />}
+                          <Typography sx={{
+                            fontSize: '0.68rem',
+                            fontFamily: "'DM Mono', monospace",
+                            color: rule.valid ? '#43E97B' : 'rgba(255,255,255,0.28)',
+                            letterSpacing: '0.05em',
+                          }}>
+                            {rule.label}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Box>
                 )}
-              </Button>
-            </fieldset>
-          </form>
 
-          <Divider
-            sx={{
-              my: 3,
-              color: '#AAA',
-              fontSize: '0.85rem',
-            }}
-          >
-            OR
-          </Divider>
+                <Button
+                  fullWidth type="submit" size="large"
+                  variant="contained" disabled={loading}
+                  sx={{
+                    mt: 2, py: 1.75,
+                    borderRadius: '14px',
+                    textTransform: 'none',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    fontFamily: 'system-ui, sans-serif',
+                    letterSpacing: '0.02em',
+                    background: 'linear-gradient(135deg, #9D78F2, #7254D4)',
+                    boxShadow: '0 8px 24px rgba(130,90,255,0.3)',
+                    border: '1px solid rgba(196,168,255,0.15)',
+                    '&:hover': {
+                      transform: 'translateY(-1px)',
+                      boxShadow: '0 12px 32px rgba(130,90,255,0.45)',
+                      background: 'linear-gradient(135deg, #AB8CF5, #8264E0)',
+                    },
+                    transition: 'all 0.25s ease',
+                    '&:disabled': {
+                      background: 'rgba(255,255,255,0.06)',
+                      color: 'rgba(255,255,255,0.2)',
+                    },
+                  }}
+                >
+                  {loading
+                    ? <CircularProgress size={20} sx={{ color: 'rgba(255,255,255,0.6)' }} />
+                    : isLogin ? 'Enter Library' : 'Create Account'}
+                </Button>
 
-          {/* Bottom Text */}
-          <Typography
-            variant="body2"
-            sx={{
-              textAlign: 'center',
-              color: '#666',
-            }}
-          >
-            {isLogin
-              ? "Don't have an account?"
-              : 'Already have an account?'}
+              </fieldset>
+            </motion.form>
+          </AnimatePresence>
 
+          {/* Divider */}
+          <Box sx={{ display: 'flex', alignItems: 'center', my: 3, gap: 2 }}>
+            <Box sx={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+            <Typography sx={{
+              fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.18)',
+              fontFamily: "'DM Mono', monospace",
+              letterSpacing: '0.1em',
+            }}>
+              OR
+            </Typography>
+            <Box sx={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+          </Box>
+
+          {/* Switch mode */}
+          <Typography sx={{
+            textAlign: 'center',
+            fontSize: '0.82rem',
+            color: 'rgba(255,255,255,0.28)',
+            fontFamily: 'system-ui, sans-serif',
+          }}>
+            {isLogin ? "Don't have an account?" : 'Already have an account?'}
             <Button
-              onClick={() => {
-                setIsLogin(!isLogin);
-
-                setStatus({
-                  error: '',
-                  success: '',
-                });
-              }}
+              onClick={switchMode}
               sx={{
-                ml: 1,
-
-                fontWeight: 700,
-
-                textTransform: 'none',
-
-                color: '#9D72FF',
-
-                '&:hover': {
-                  background: 'transparent',
-                  color: '#7E57FF',
-                },
+                ml: 0.75, fontWeight: 600, fontSize: '0.82rem',
+                textTransform: 'none', fontFamily: 'system-ui, sans-serif',
+                color: '#C4A8FF', p: 0, minWidth: 0, verticalAlign: 'baseline',
+                '&:hover': { background: 'transparent', color: '#D8C4FF' },
               }}
             >
               {isLogin ? 'Sign Up' : 'Login'}
             </Button>
           </Typography>
-        </Paper>
-      </motion.div>
+
+        </Box>
+      </Box>
     </Box>
   );
 }
 
-// INPUT FIELD STYLES
 const textFieldStyles = {
   mt: 1.5,
-
   '& .MuiOutlinedInput-root': {
-    borderRadius: '18px',
-
-    background: '#F8F8FA',
-
-    transition: '0.3s',
-
-    '& fieldset': {
-      border: 'none',
-    },
-
+    borderRadius: '14px',
+    background: 'rgba(255,255,255,0.04)',
+    transition: 'all 0.2s ease',
+    '& fieldset': { border: '1px solid rgba(255,255,255,0.07)' },
     '&:hover': {
-      background: '#F3F3F7',
+      background: 'rgba(255,255,255,0.06)',
+      '& fieldset': { border: '1px solid rgba(196,168,255,0.2)' },
     },
-
     '&.Mui-focused': {
-      background: '#FFFFFF',
-      boxShadow: 'none',
-
-      '& fieldset': {
-        border: 'none',
-      },
+      background: 'rgba(196,168,255,0.06)',
+      '& fieldset': { border: '1px solid rgba(196,168,255,0.4)' },
+    },
+    '& input': {
+      color: 'rgba(255,255,255,0.88)',
+      fontSize: '0.9rem',
+      fontFamily: 'system-ui, sans-serif',
+      '&::placeholder': { color: 'rgba(255,255,255,0.18)' },
     },
   },
-
   '& .MuiInputLabel-root': {
-    color: '#888',
+    color: 'rgba(255,255,255,0.25)',
+    fontSize: '0.875rem',
+    fontFamily: 'system-ui, sans-serif',
   },
-
-  '& .MuiInputLabel-root.Mui-focused': {
-    color: '#777',
-  },
+  '& .MuiInputLabel-root.Mui-focused': { color: 'rgba(196,168,255,0.7)' },
 };
