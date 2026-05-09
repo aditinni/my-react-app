@@ -1,6 +1,5 @@
 {
   "name": "my-react-app",
-  "homepage": "https://github.com/aditinni/my-react-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
